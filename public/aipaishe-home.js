@@ -1,0 +1,27 @@
+angular.module('aipaisheHomeDirective', [])
+.directive('aipaisheHome',['$http', function($http){
+
+  function link (scope){
+      var $grid = $('.grid').masonry({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        columnWidth: '.grid-sizer'
+      });
+      // layout Isotope after each image loads
+      $grid.imagesLoaded().progress( function() {
+        $grid.masonry();
+      }
+  );
+
+    $http.get("http://localhost:8080/get-by-email-json?email=cslxxwilliam@gmail.com").
+    success(function(data){
+      scope.userId= data.id;
+    });
+  }
+  return {
+    restrict: 'E',
+    templateUrl: 'aipaishe-home.html',
+    link: link
+  };
+
+}]);
