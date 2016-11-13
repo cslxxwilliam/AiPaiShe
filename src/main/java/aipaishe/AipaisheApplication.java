@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by hillmon on 18/9/2016.
  */
 @SpringBootApplication
-public class AipaisheAppliation {
+public class AipaisheApplication {
 
     public static void main(String[] args) {
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
