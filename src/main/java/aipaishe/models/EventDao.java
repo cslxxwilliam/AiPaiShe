@@ -43,6 +43,14 @@ public class EventDao {
         return entityManager.find(Event.class, name);
     }
 
+    /**
+     * Update the passed event in the database.
+     */
+    public void update(Event event) {
+        entityManager.merge(event);
+        return;
+    }
+
     // Private fields
 
     // An EntityManager will be automatically injected from entityManagerFactory

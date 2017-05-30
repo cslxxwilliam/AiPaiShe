@@ -26,6 +26,8 @@ public class Event {
     @NotNull
     private Date eventDate;
 
+    private String eventDesc;
+
     // Public methods
 
     public Event() { }
@@ -50,6 +52,10 @@ public class Event {
 
     public void setEventName(String name) {
         this.eventName = name;
+    }
+
+    public void setEventDesc (String desc) {
+        this.eventDesc = desc;
     }
 
     public long getId() {

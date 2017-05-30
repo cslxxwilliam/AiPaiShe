@@ -2,6 +2,7 @@ package aipaishe.controllers;
 
 import aipaishe.models.Event;
 import aipaishe.models.EventDao;
+import aipaishe.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,23 @@ public class EventController {
             return null;
         }
         return event;
+    }
+
+    /**
+     * Update the email and the name for the user indentified by the passed id.
+     */
+    @RequestMapping(value="/updateevent")
+    @ResponseBody
+    public String updateDesc(long id, String desc) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventDesc(desc);
+            eventDao.update(event);
+        }
+        catch (Exception ex) {
+            return "Error updating the event: " + ex.toString();
+        }
+        return "Event successfully updated!";
     }
 
     // Private fields
