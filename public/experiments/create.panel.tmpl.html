@@ -1,0 +1,43 @@
+<md-dialog aria-label="Create Event">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create Event</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div>
+                <form name="userForm">
+                        <md-input-container>
+                            <label>Date</label>
+                            <md-datepicker ng-model="user.submissionDate"></md-datepicker>
+                        </md-input-container>
+
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <label>Name</label>
+                            <input ng-model="user.firstName">
+                        </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Venue</label>
+                        <input ng-model="user.address">
+                    </md-input-container>
+                </form>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <md-button ng-click="answer('not useful')">
+                Cancel
+            </md-button>
+            <md-button ng-click="answer('useful')">
+                Confirm
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
