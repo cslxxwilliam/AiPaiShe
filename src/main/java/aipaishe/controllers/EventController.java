@@ -23,11 +23,11 @@ public class EventController {
      */
     @RequestMapping(value="/createevent")
     @ResponseBody
-    public String createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName) {
+    public String createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) {
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             Date eventDate = formatter.parse(dateStr);
-            Event event = new Event(ownerId, eventDate, eventName);
+            Event event = new Event(ownerId, eventDate, eventName, eventVenue);
             eventDao.create(event);
         }
         catch (Exception ex) {
