@@ -13,10 +13,10 @@ angular.module('aipaisheHomeDirective', [])
       }
   );
 
-//    $http.get("http://localhost:8080/get-by-email-json?email=cslxxwilliam@gmail.com").
-//    success(function(data){
-//      scope.userId= data.id;
-//    });
+    $http.get("http://localhost:8080/get-by-email-json?email=cslxxwilliam@gmail.com").
+    success(function(data){
+      scope.userId= data.id;
+    });
   }
   return {
     restrict: 'E',
