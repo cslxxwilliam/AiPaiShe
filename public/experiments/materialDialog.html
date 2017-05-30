@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Angular Material Experiment</title>
+
+    <!--Angular JS Library-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script src="material-experiment.js"></script>
+
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+</head>
+<body>
+<div ng-controller="DialogControl" class="md-padding dialogdemoBasicUsage" id="popupContainer" ng-cloak="" ng-app="MyApp">
+    <p class="inset" layout-align="center">
+        Open a dialog over the app's content. Press escape or click outside to close the dialog and
+        send focus back to the triggering button.
+    </p>
+
+    <div class="dialog-demo-content" layout="row" layout-wrap="" layout-margin="" layout-align="center">
+        <md-button class="md-primary md-raised" ng-click="showPrompt($event)">
+            Prompt Dialog
+        </md-button>
+    </div>
+
+    <div ng-if="status" id="status">
+        <b layout="row" layout-align="center center" class="md-padding">
+            {{status}}
+        </b>
+    </div>
+</div>
+</body>
+</html>
