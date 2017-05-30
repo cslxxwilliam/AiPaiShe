@@ -26,6 +26,10 @@ public class Event {
     @NotNull
     private Date eventDate;
 
+    @NotNull
+    private String eventVenue;
+
+
     private String eventDesc;
 
     // Public methods
@@ -36,10 +40,11 @@ public class Event {
         this.eventId = id;
     }
 
-    public Event(long ownerId, Date eventDate, String eventName) {
-        this.ownerId = ownerId;
-        this.eventDate = eventDate;
-        this.eventName = eventName;
+    public Event(long owner, Date date, String name, String venue) {
+        this.ownerId = owner;
+        this.eventDate = date;
+        this.eventName = name;
+        this.eventVenue = venue;
     }
 
     public void setOwnerId(long id) {
