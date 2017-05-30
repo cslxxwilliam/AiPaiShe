@@ -1,4 +1,4 @@
-package hello.models;
+package aipaishe.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

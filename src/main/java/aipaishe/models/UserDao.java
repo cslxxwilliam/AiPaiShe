@@ -1,5 +1,6 @@
-package hello.models;
+package aipaishe.models;
 
+import aipaishe.models.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

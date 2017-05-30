@@ -93,9 +93,8 @@
                     <h2 class="text-branding text-jumbo text-contrast hero__heading">
                         Love Goes On
                     </h2>
-                    <button class="btn btn-flat btn-large              js-learn-about-airbnb">
-                        Learn About AiPaiShe
-                    </button>
+                    <md-button class="md-raised">Join an EXISTING event</md-button>
+                    <md-button class="md-raised">Create a NEW event</md-button>
                 </div>
                 <div class="show-sm sm-search">
                     <div class="input-addon" id="sm-search-field"
@@ -140,7 +139,7 @@
                                                 <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
                                             </md-not-found>
                                         </md-autocomplete>
-                                        <md-button class="md-raised md-primary" go-click="/go/to/this">Search</md-button>
+                                        <md-button class="md-raised md-primary" go-click="search()">Search</md-button>
                                     </form>
                                 </md-content>
                             </div>

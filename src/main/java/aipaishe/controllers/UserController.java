@@ -1,7 +1,7 @@
-package hello.controllers;
+package aipaishe.controllers;
 
-import hello.models.User;
-import hello.models.UserDao;
+import aipaishe.models.User;
+import aipaishe.models.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +15,7 @@ public class UserController {
      * Create a new user with an auto-generated id and email and name as passed
      * values.
      */
-    @RequestMapping(value="/create")
+    @RequestMapping(value="/createuser")
     @ResponseBody
     public String create(@RequestParam(value="email")String email, @RequestParam(value="name")String name) {
         try {
@@ -31,7 +31,7 @@ public class UserController {
     /**
      * Delete the user with the passed id.
      */
-    @RequestMapping(value="/delete")
+    @RequestMapping(value="/deleteuser")
     @ResponseBody
     public String delete(long id) {
         try {
@@ -47,7 +47,7 @@ public class UserController {
     /**
      * Retrieve the id for the user with the passed email address.
      */
-    @RequestMapping(value="/get-by-email")
+    @RequestMapping(value="/get-user-by-email")
     @ResponseBody
     public String getByEmail(String email) {
         String userId;
@@ -64,7 +64,7 @@ public class UserController {
     /**
      * Retrieve the id for the user with the passed email address.
      */
-    @RequestMapping(value="/get-by-email-json")
+    @RequestMapping(value="/get-user-by-email-json")
     @ResponseBody
     public User getByEmailJson(String email) {
         User user;
@@ -82,7 +82,7 @@ public class UserController {
     /**
      * Update the email and the name for the user indentified by the passed id.
      */
-    @RequestMapping(value="/update")
+    @RequestMapping(value="/updateuser")
     @ResponseBody
     public String updateName(long id, String email, String name) {
         try {
