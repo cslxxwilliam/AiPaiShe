@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class UserController {
 
@@ -77,6 +80,19 @@ public class UserController {
             return null;
         }
         return user;
+    }
+
+    @RequestMapping(value="/get-all-user-json")
+    @ResponseBody
+    public List<User> getAllUser() {
+        List userList = new ArrayList();
+        try {
+            userList = userDao.getAll();
+        }
+        catch (Exception ex) {
+            return null;
+        }
+        return userList;
     }
 
     /**

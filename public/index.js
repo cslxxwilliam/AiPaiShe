@@ -1,1 +1,1 @@
-angular.module('Aipaishe', ['aipaisheHomeDirective','autocompleteDemo']);
+angular.module('Aipaishe', ['aipaisheHomeDirective','autocompleteDemo','dialogDemo']);
