@@ -25,7 +25,7 @@ public class EventController {
     @ResponseBody
     public String createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) {
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = formatter.parse(dateStr);
             Event event = new Event(ownerId, eventDate, eventName, eventVenue);
             eventDao.create(event);

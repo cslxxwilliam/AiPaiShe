@@ -1,6 +1,10 @@
 angular.module('dialogDemo', ['ngMaterial'])
 
-.controller('AppCtrl', function($scope, $mdDialog) {
+.controller('AppCtrl', function($scope, $http,  $mdDialog) {
+    $scope.eventDate = null;
+    $scope.eventName = null;
+    $scope.eventVenue = null;
+
   $scope.status = '  ';
   $scope.customFullscreen = false;
 
@@ -26,20 +30,28 @@ angular.module('dialogDemo', ['ngMaterial'])
 $scope.showCreateEventPanel= function(event){
  $mdDialog.show({
       controller: DialogController,
-      templateUrl: 'create.panel.tmpl.html',
+      templateUrl: 'create.panel.template.html',
+      scope: $scope,
+      preserveScope: true,
       parent: angular.element(document.body),
       targetEvent: event,
       clickOutsideToClose:true,
       fullscreen: false // Only for -xs, -sm breakpoints.
     })
     .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
+      $scope.status = 'Confirming';
+      debugger
+      $http.jsonp("http://localhost:8080/createevent?ownerId=1&"+"eventName="+$scope.eventName+"&eventDate="+$scope.eventDate
+        +"&eventVenue="+$scope.eventVenue).success(function(data){
+            $scope.status="submitted request to server!"
+      });
     }, function() {
       $scope.status = 'You cancelled the dialog.';
     });
 }
 
   function DialogController($scope, $mdDialog) {
+
     $scope.hide = function() {
       $mdDialog.hide();
     };
