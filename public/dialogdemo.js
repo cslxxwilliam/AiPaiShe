@@ -41,9 +41,11 @@ $scope.showCreateEventPanel= function(event){
     .then(function(answer) {
       $scope.status = 'Confirming';
       $http.jsonp("http://localhost:8080/createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
-        +"&venue="+$scope.eventVenue).success(function(data){
-            $scope.status="submitted request to server!"
-      }).;
+        +"&venue="+$scope.eventVenue).then(function(data){
+            console.log("success creating event!");
+      }, function(error){
+            console.log("error when hitting server");
+      });
     }, function() {
       $scope.status = 'You cancelled the dialog.';
     });
