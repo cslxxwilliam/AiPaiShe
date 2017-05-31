@@ -21,9 +21,10 @@ angular.module('dialogDemo', ['ngMaterial'])
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to name your dog ' + result + '.';
+      $scope.status = 'You decided to join Event# ' + result + '.';
+      window.location.href = 'http://localhost:8080/eventviewer.html';
     }, function() {
-      $scope.status = 'You didn\'t name your dog.';
+      $scope.status = 'You didn\'t join any event.';
     });
   };
 

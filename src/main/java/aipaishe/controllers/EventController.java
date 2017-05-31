@@ -2,7 +2,7 @@ package aipaishe.controllers;
 
 import aipaishe.models.Event;
 import aipaishe.models.EventDao;
-import aipaishe.models.User;
+import aipaishe.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,18 +22,22 @@ public class EventController {
      * Create a new event
      */
     @RequestMapping(value="/createevent")
-    @ResponseBody
-    public String createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) {
+    public Response createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) {
+        Response resp = new Response("","", null);
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = formatter.parse(dateStr);
             Event event = new Event(ownerId, eventDate, eventName, eventVenue);
             eventDao.create(event);
+            resp.setStatus("Successful");
+            resp.setMessage("Event successfully created!");
+            return resp;
         }
         catch (Exception ex) {
-            return "Error creating the event: " + ex.toString();
+            resp.setStatus("Failed");
+            resp.setMessage("Error creating the event: " + ex.toString());
+            return resp;
         }
-        return "Event successfully created!";
     }
 
     /**
