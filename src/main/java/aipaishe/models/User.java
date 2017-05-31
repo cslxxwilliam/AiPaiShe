@@ -22,7 +22,8 @@ public class User {
 
     // Public methods
 
-    public User() { }
+    public User() {
+    }
 
     public User(long id) {
         this.id = id;
@@ -43,5 +44,13 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
     }
 }
