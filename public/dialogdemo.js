@@ -40,10 +40,10 @@ $scope.showCreateEventPanel= function(event){
     })
     .then(function(answer) {
       $scope.status = 'Confirming';
-      $http.jsonp("http://localhost:8080/createevent?ownerId=1&"+"eventName="+$scope.eventName+"&eventDate="+$scope.eventDate
-        +"&eventVenue="+$scope.eventVenue).success(function(data){
+      $http.jsonp("http://localhost:8080/createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
+        +"&venue="+$scope.eventVenue).success(function(data){
             $scope.status="submitted request to server!"
-      });
+      }).;
     }, function() {
       $scope.status = 'You cancelled the dialog.';
     });
