@@ -40,7 +40,6 @@ $scope.showCreateEventPanel= function(event){
     })
     .then(function(answer) {
       $scope.status = 'Confirming';
-      debugger
       $http.jsonp("http://localhost:8080/createevent?ownerId=1&"+"eventName="+$scope.eventName+"&eventDate="+$scope.eventDate
         +"&eventVenue="+$scope.eventVenue).success(function(data){
             $scope.status="submitted request to server!"
