@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="Aipaishe">
+<html ng-app="aipaisheApp">
 <head>
     <title>Aipaishe</title>
     <link rel="stylesheet" type="text/css" href="mystyle.css">
@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
     <!--Angular JS Library-->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
     <!-- Angular Material Library -->
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
@@ -24,6 +25,7 @@
 
     <script type="text/javascript" src="autocompletedemo.js"></script>
     <script type="text/javascript" src="dialogdemo.js"></script>
+    <script type="text/javascript" src="aipaishe.config.js"></script>
 
     <link href="https://a0.muscache.com/airbnb/static/packages/common_o2.1-ba9aa41905017f9b44d1f9fbf1be1f27.css"
           media="all" rel="stylesheet" type="text/css">
@@ -33,7 +35,7 @@
           rel="stylesheet" type="text/css">
 <body>
 
-<aipaishe-home></aipaishe-home>
+<ng-view></ng-view>s>
 
 </body>
 </html>
