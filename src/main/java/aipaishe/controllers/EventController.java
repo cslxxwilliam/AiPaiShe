@@ -4,11 +4,9 @@ import aipaishe.models.Event;
 import aipaishe.models.EventDao;
 import aipaishe.models.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,23 +19,14 @@ public class EventController {
     /**
      * Create a new event
      */
+    @CrossOrigin
     @RequestMapping(value="/createevent")
-    public Response createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) {
-        Response resp = new Response("","", null);
-        try {
+    public @ResponseBody Event createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) throws ParseException {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = formatter.parse(dateStr);
             Event event = new Event(ownerId, eventDate, eventName, eventVenue);
             eventDao.create(event);
-            resp.setStatus("Successful");
-            resp.setMessage("Event successfully created!");
-            return resp;
-        }
-        catch (Exception ex) {
-            resp.setStatus("Failed");
-            resp.setMessage("Error creating the event: " + ex.toString());
-            return resp;
-        }
+            return event;
     }
 
     /**

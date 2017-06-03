@@ -1,6 +1,6 @@
 angular.module('dialogDemo', ['ngMaterial'])
 
-.controller('AppCtrl', function($scope, $http,  $mdDialog) {
+.controller('AppCtrl', function($scope, $http,  $sce, $mdDialog) {
     $scope.eventDate = null;
     $scope.eventName = null;
     $scope.eventVenue = null;
@@ -41,8 +41,10 @@ $scope.showCreateEventPanel= function(event){
     })
     .then(function(answer) {
       $scope.status = 'Confirming';
-      $http.jsonp("http://localhost:8080/createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
-        +"&venue="+$scope.eventVenue).then(function(data){
+      var url = "http://localhost:8080/createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
+                        +"&venue="+$scope.eventVenue;
+      var trustedUrl = $sce.trustAsResourceUrl(url);
+      $http.get(trustedUrl).then(function(data){
             console.log("success creating event!");
       }, function(error){
             console.log("error when hitting server");
