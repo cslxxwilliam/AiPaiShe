@@ -33,14 +33,35 @@ public class EventDao {
     }
 
     /**
+     * Delete the event from the database.
+     */
+    public void delete(Event event) {
+        if (entityManager.contains(event))
+            entityManager.remove(event);
+        else
+            entityManager.remove(entityManager.merge(event));
+        return;
+    }
+
+    public List getAll() {
+        return entityManager.createQuery("from Event").getResultList();
+    }
+
+    /**
      * Return the event having the passed id.
      */
     public Event getById(long id) {
         return entityManager.find(Event.class, id);
     }
 
-    public Event getByName(String name) {
-        return entityManager.find(Event.class, name);
+    /**
+     * Return the event having the passed event name.
+     */
+    public Event getByName (String name) {
+        return (Event) entityManager.createQuery(
+                "from Event where eventName = :name")
+                .setParameter("name", name)
+                .getSingleResult();
     }
 
     /**

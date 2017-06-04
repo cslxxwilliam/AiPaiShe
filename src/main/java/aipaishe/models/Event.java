@@ -30,14 +30,19 @@ public class Event {
     private String eventVenue;
 
 
+    public String getEventDesc() {
+        return eventDesc;
+    }
+
     private String eventDesc;
 
     // Public methods
 
-    public Event() { }
+    public Event() {
+    }
 
-    public Event(long id) {
-        this.eventId = id;
+    public Event(long eventId) {
+        this.eventId = eventId;
     }
 
     public Event(long owner, Date date, String name, String venue) {
@@ -47,23 +52,57 @@ public class Event {
         this.eventVenue = venue;
     }
 
-    public void setOwnerId(long id) {
-        this.ownerId = id;
+    public Event(long ownerId, String eventName, Date eventDate, String eventVenue, String eventDesc) {
+        this.ownerId = ownerId;
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventVenue = eventVenue;
+        this.eventDesc = eventDesc;
     }
 
-    public void setEventDate (Date date) {
-        this.eventDate = date;
-    }
+    // Getter and Setter
 
-    public void setEventName(String name) {
-        this.eventName = name;
-    }
-
-    public void setEventDesc (String desc) {
-        this.eventDesc = desc;
-    }
-
-    public long getId() {
+    public long getEventId() {
         return eventId;
+    }
+
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
+    public String getEventVenue() {
+        return eventVenue;
+    }
+
+    public void setEventVenue(String eventVenue) {
+        this.eventVenue = eventVenue;
+    }
+
+    public void setEventDesc(String eventDesc) {
+        this.eventDesc = eventDesc;
     }
 }

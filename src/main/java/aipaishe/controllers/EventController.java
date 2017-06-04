@@ -2,13 +2,15 @@ package aipaishe.controllers;
 
 import aipaishe.models.Event;
 import aipaishe.models.EventDao;
-import aipaishe.models.Response;
+import aipaishe.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by hillmon on 7/5/2017.
@@ -21,7 +23,8 @@ public class EventController {
      */
     @CrossOrigin
     @RequestMapping(value="/createevent")
-    public @ResponseBody Event createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) throws ParseException {
+    @ResponseBody
+    public Event createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) throws ParseException {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date eventDate = formatter.parse(dateStr);
             Event event = new Event(ownerId, eventDate, eventName, eventVenue);
@@ -38,6 +41,32 @@ public class EventController {
         Event event;
         try {
             event = eventDao.getById(id);
+        }
+        catch (Exception ex) {
+            return null;
+        }
+        return event;
+    }
+
+    @RequestMapping(value="/get-all-event-json")
+    @ResponseBody
+    public List<Event> getAllEvent() {
+        List eventList = new ArrayList();
+        try {
+            eventList = eventDao.getAll();
+        }
+        catch (Exception ex) {
+            return null;
+        }
+        return eventList;
+    }
+
+    @RequestMapping(value="/get-event-by-name-json")
+    @ResponseBody
+    public Event getByNameJson(String name) {
+        Event event;
+        try {
+            event = eventDao.getByName(name);
         }
         catch (Exception ex) {
             return null;
