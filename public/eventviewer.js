@@ -1,9 +1,12 @@
 angular.module('EventViewerApp', ['ngMaterial'])
-    .controller('BasicDemoCtrl', BasicDemoCtrl);
-
-function BasicDemoCtrl($mdPanel, $scope) {
-  $scope.readonly=true;
-  $scope.eventDate = new Date("2017-06-17");
-  $scope.eventName = "Shenzhen APS Party";
-  $scope.eventVenue = "Binhe Dadao No.179";
-};
+    .component('eventDetail', {
+        templateUrl: 'eventviewer.html',
+        controller: ['$routeParams',
+          function EventDetailController($routeParams) {
+            this.eventId = $routeParams.eventId;
+            this.eventName = 'Dummy Event';
+            this.eventDate = new Date();
+            this.eventVenue = 'AiPaiShe Office HK';
+          }
+        ]
+      });

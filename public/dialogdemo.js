@@ -1,6 +1,6 @@
 angular.module('dialogDemo', ['ngMaterial'])
 
-.controller('AppCtrl', function($scope, $http,  $sce, $mdDialog) {
+.controller('AppCtrl', function($scope, $http, $location, $sce, $mdDialog) {
     $scope.eventDate = null;
     $scope.eventName = null;
     $scope.eventVenue = null;
@@ -21,10 +21,12 @@ angular.module('dialogDemo', ['ngMaterial'])
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-      $scope.status = 'You decided to join Event# ' + result + '.';
-      window.location.href = 'http://localhost:8080/eventviewer.html';
+    // Action for OK
+//      $scope.status = 'You decided to join Event ' + result + '.';
+      $location.path( '/event/' + result );
     }, function() {
-      $scope.status = 'You didn\'t join any event.';
+    // Action for Cancel
+//      $scope.status = 'You didn\'t join any event.';
     });
   };
 

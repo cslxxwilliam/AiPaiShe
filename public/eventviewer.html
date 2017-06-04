@@ -1,49 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Event Viewer</title>
-    <link rel="stylesheet" type="text/css" href="mystyle.css">
-
-    <!-- Angular Material style sheet -->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-
-    <!--Angular JS Library-->
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-
-    <!-- Angular Material Library -->
-    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-    <script type="text/javascript" src="eventviewer.js"></script>
-</head>
-<body>
-<div ng-controller="BasicDemoCtrl" ng-app="EventViewerApp">
+<div>
     <md-content class="md-padding">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Event</h2>
+                <h2>Event ID {{$ctrl.eventId}}</h2>
                 <span flex></span>
             </div>
         </md-toolbar>
 
         <md-input-container class="md-block">
             <label>Date</label>
-            <md-datepicker ng-model="eventDate" md-hide-icons="calendar" ng-disabled="readonly"></md-datepicker>
+            <md-datepicker ng-model="$ctrl.eventDate" md-hide-icons="calendar" ng-disabled="readonly"></md-datepicker>
         </md-input-container>
+
         <md-input-container class="md-block">
-                        <label>Name</label>
-                        <input ng-model="eventName" ng-disabled="readonly">
+            <label>Name</label>
+            <input ng-model="$ctrl.eventName" ng-disabled="readonly">
         </md-input-container>
 
         <md-input-container class="md-block">
             <label>Venue</label>
-            <input ng-model="eventVenue" ng-disabled="readonly">
+            <input ng-model="$ctrl.eventVenue" ng-disabled="readonly">
         </md-input-container>
 
     </md-content>
 </div>
-</body>
-</html>

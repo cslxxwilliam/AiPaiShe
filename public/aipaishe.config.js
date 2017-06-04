@@ -11,7 +11,7 @@ angular.module('aipaisheApp')
             templateUrl: 'eventviewer.html'
         }).
         when('/event/:eventId', {
-            templateUrl: 'eventviewer.html'
+            template: '<event-detail></event-detail>'
         }).
         otherwise('/home');
     }
