@@ -44,7 +44,6 @@ public class UserDao {
     /**
      * Return all the users stored in the database.
      */
-    @SuppressWarnings("unchecked")
     public List getAll() {
         return entityManager.createQuery("from User").getResultList();
     }
