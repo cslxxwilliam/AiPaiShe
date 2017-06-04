@@ -3,46 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Event Viewer</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+
+    <!-- Angular Material style sheet -->
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+
+    <!--Angular JS Library-->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+    <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script type="text/javascript" src="eventviewer.js"></script>
 </head>
 <body>
-<div class="grid">
-    <div class="grid-sizer"></div>
-    <div class="grid-item">
-        <img src=".\photos\1.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\2.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\3.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\4.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\5.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\6.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\7.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\8.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\9.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\10.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\11.jpg"/>
-    </div>
-    <div class="grid-item">
-        <img src=".\photos\12.jpg"/>
-    </div>
+<div ng-controller="BasicDemoCtrl" ng-app="EventViewerApp">
+    <md-content class="md-padding">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Event</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <md-input-container class="md-block">
+            <label>Date</label>
+            <md-datepicker ng-model="eventDate" md-hide-icons="calendar" ng-disabled="readonly"></md-datepicker>
+        </md-input-container>
+        <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="eventName" ng-disabled="readonly">
+        </md-input-container>
+
+        <md-input-container class="md-block">
+            <label>Venue</label>
+            <input ng-model="eventVenue" ng-disabled="readonly">
+        </md-input-container>
+
+    </md-content>
 </div>
 </body>
 </html>
