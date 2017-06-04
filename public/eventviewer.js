@@ -1,6 +1,5 @@
 angular.module('EventViewerApp', ['ngMaterial'])
-    .controller('BasicDemoCtrl', BasicDemoCtrl)
-    .controller('PanelDialogCtrl', PanelDialogCtrl);
+    .controller('BasicDemoCtrl', BasicDemoCtrl);
 
 function BasicDemoCtrl($mdPanel, $scope) {
   $scope.readonly=true;
