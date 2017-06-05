@@ -2,24 +2,24 @@ angular.module('aipaisheHomeDirective', [])
 .directive('aipaisheHome',['$http', function($http){
 
   function link (scope){
-      var $grid = $('.grid').masonry({
-        itemSelector: '.grid-item',
-        percentPosition: true,
-        columnWidth: '.grid-sizer'
-      });
+    var $grid = $('.grid').masonry({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      columnWidth: '.grid-sizer'
+    });
       // layout Isotope after each image loads
       $grid.imagesLoaded().progress( function() {
         $grid.masonry();
       }
-  );
-  }
+      );
+    }
 
-  return {
-    restrict: 'E',
-    templateUrl: 'aipaishe-home.html',
-    link: link
-  };
-}])
+    return {
+      restrict: 'E',
+      templateUrl: 'aipaishe-home.html',
+      link: link
+    };
+  }])
 
 .directive( 'goClick', function ( $location ) {
   return function ( scope, element, attrs ) {
@@ -36,5 +36,3 @@ angular.module('aipaisheHomeDirective', [])
     });
   };
 });
-
-;
