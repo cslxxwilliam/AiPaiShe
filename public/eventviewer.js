@@ -1,12 +1,17 @@
 angular.module('EventViewerApp', ['ngMaterial'])
     .component('eventDetail', {
         templateUrl: 'eventviewer.html',
-        controller: ['$routeParams',
-          function EventDetailController($routeParams) {
-            this.eventId = $routeParams.eventId;
-            this.eventName = 'Dummy Event';
-            this.eventDate = new Date();
-            this.eventVenue = 'AiPaiShe Office HK';
+        controller: ['$http','$routeParams',
+          function EventDetailController($http,$routeParams) {
+            var self = this;
+            self.readonly = true;
+            $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response){
+                        self.eventData = response.data;
+                        // convert the returned date from millisecond to date type
+                        self.eventDate = new Date(self.eventData.eventDate);
+                  }, function(error){
+                  alert('error when hitting server' + error);
+                  });
           }
         ]
       });
