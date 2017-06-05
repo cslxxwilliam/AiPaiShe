@@ -12,6 +12,17 @@ angular.module('EventViewerApp', ['ngMaterial'])
                   }, function(error){
                   alert('error when hitting server' + error);
                   });
+
+            var $grid = $('.grid').masonry({
+                  itemSelector: '.grid-item',
+                  percentPosition: true,
+                  columnWidth: '.grid-sizer'
+                });
+                  // layout Isotope after each image loads
+                  $grid.imagesLoaded().progress( function() {
+                    $grid.masonry();
+                  }
+                  );
           }
         ]
       });
