@@ -21,12 +21,8 @@ angular.module('dialogDemo', ['ngMaterial'])
       .cancel('Cancel');
 
     $mdDialog.show(confirm).then(function(result) {
-    // Action for OK
-//      $scope.status = 'You decided to join Event ' + result + '.';
       $location.path( '/event/' + result );
     }, function() {
-    // Action for Cancel
-//      $scope.status = 'You didn\'t join any event.';
     });
   };
 
@@ -43,11 +39,11 @@ $scope.showCreateEventPanel= function(event){
     })
     .then(function(answer) {
       $scope.status = 'Confirming';
-      var url = "http://localhost:8080/createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
+      var url = "createevent?owner=1&"+"name="+$scope.eventName+"&date="+new Date($scope.eventDate).toISOString()
                         +"&venue="+$scope.eventVenue;
-      var trustedUrl = $sce.trustAsResourceUrl(url);
-      $http.get(trustedUrl).then(function(data){
-            console.log("success creating event!");
+      $http.get(url).then(function(response){
+            console.log("success creating event! Event ID is "+response.data.eventId);
+            $location.path( '/event/' + response.data.eventId );
       }, function(error){
             console.log("error when hitting server");
       });
