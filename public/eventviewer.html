@@ -22,6 +22,19 @@
             <input ng-model="$ctrl.eventData.eventVenue" ng-disabled="$ctrl.readonly">
         </md-input-container>
 
+        <!--<div>-->
+            <!--<div class="col-xs-6 col-xs-offset-3">-->
+                <!--<div class="well">-->
+
+        <form action="/upload" class="dropzone">
+            <div class="fallback">
+                <input name="file" type="file" multiple />
+            </div>
+        </form>
+            <!--</div>-->
+            <!--</div>-->
+        <!--</md-input-container>-->
+
         <md-input-container class="md-block">
             <label>Photos</label>
             <br>
@@ -45,4 +58,6 @@
             </div>
         </md-input-container>
     </md-content>
+
+
 </div>

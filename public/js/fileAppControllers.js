@@ -11,6 +11,18 @@ angular.module('fileApp').controller('fileCtrl', ['$scope',
         $scope.reset = function() {
             $scope.resetDropzone();
         };
+
+        $scope.onFileSelect = function($files) {
+          Upload.upload({
+            url: 'my/upload/url',
+            file: $files,
+          }).progress(function(e) {
+          }).then(function(data, status, headers, config) {
+            // file is uploaded successfully
+            console.log(data);
+          });
+         }
+
     }
 
     ]);

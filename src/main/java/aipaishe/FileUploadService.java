@@ -1,6 +1,8 @@
 package aipaishe;
 
 import aipaishe.models.FileUpload;
+import aipaishe.models.FileUploadFileBasedRepository;
+import aipaishe.models.FileUploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,6 @@ public class FileUploadService {
 
     // Upload the file
     public void uploadFile(FileUpload doc) {
-        fileUploadRepository.saveAndFlush(doc);
+        fileUploadRepository.save(doc);
     }
 }

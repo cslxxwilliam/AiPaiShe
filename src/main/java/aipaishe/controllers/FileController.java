@@ -2,6 +2,7 @@ package aipaishe.controllers;
 
 import aipaishe.FileUploadService;
 import aipaishe.models.FileUpload;
+import aipaishe.models.FileUploadFileBasedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import javax.servlet.http.HttpSession;
 import java.util.Iterator;
 
 /**
@@ -60,7 +62,7 @@ public class FileController {
             value = "/upload",
             method = RequestMethod.POST
     )
-    public ResponseEntity uploadFile(MultipartHttpServletRequest request) {
+    public ResponseEntity uploadFile(HttpSession session, MultipartHttpServletRequest request) {
 
         try {
             Iterator<String> itr = request.getFileNames();
@@ -72,7 +74,8 @@ public class FileController {
                 String filename = file.getOriginalFilename();
                 byte[] bytes = file.getBytes();
 
-                FileUpload newFile = new FileUpload(filename, bytes, mimeType);
+                String eventId = (String)session.getAttribute("eventId");
+                FileUpload newFile = new FileUpload(eventId+"-"+filename, bytes, mimeType);
 
                 fileUploadService.uploadFile(newFile);
             }
