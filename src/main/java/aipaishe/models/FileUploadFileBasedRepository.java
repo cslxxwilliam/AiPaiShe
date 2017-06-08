@@ -9,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -23,7 +22,8 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
 
     @Override
     public List<PhotoLocation> findByFileName(String eventId) {
-        File dir = new File(env.getProperty("file.save.path"));
+        String folder = env.getProperty("file.save.path");
+        File dir = new File(folder);
         File [] files = dir.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
@@ -32,7 +32,12 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
         });
 
         assert files != null;
-        return Arrays.stream(files).map((f) -> new PhotoLocation(eventId, f.getName())).collect(toList());
+        return Arrays.stream(files).map((f) -> new PhotoLocation(eventId, getFullPathForExternal(folder, f.getName()))).collect(toList());
+    }
+
+    private String getFullPathForExternal(String folderName, String fileName) {
+        //remove ./public since web url does not need it
+        return folderName.concat(fileName).substring(8);
     }
 
     @Override

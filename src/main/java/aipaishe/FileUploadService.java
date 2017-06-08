@@ -18,8 +18,8 @@ public class FileUploadService {
     FileUploadRepository fileUploadRepository;
 
     // Retrieve file
-    public List<PhotoLocation> findByEventId(String filename) {
-        return fileUploadRepository.findByFileName(filename);
+    public List<PhotoLocation> findByEventId(String eventId) {
+        return fileUploadRepository.findByFileName(eventId);
     }
 
     // Upload the file
