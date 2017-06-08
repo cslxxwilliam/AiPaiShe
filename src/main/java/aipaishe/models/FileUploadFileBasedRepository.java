@@ -3,11 +3,15 @@ package aipaishe.models;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by williamxuxianglin on 7/6/17.
@@ -18,8 +22,17 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
     private Environment env;
 
     @Override
-    public FileUpload findByFileName(String filename) {
-        return null;
+    public List<PhotoLocation> findByFileName(String eventId) {
+        File dir = new File(env.getProperty("file.save.path"));
+        File [] files = dir.listFiles(new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                return name.startsWith(eventId+"-");
+            }
+        });
+
+        assert files != null;
+        return Arrays.stream(files).map((f) -> new PhotoLocation(eventId, f.getName())).collect(toList());
     }
 
     @Override
@@ -32,19 +45,16 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
                 newFile.createNewFile();
             }
 
-
-//            try(FileOutputSt`ream fos = new FileOutputStream(newFile.getName())) {
-//                fos.write(doc.getFile());
-//            }catch (IOException e){
-//                e.printStackTrace();
-//            }
-
-            InputStream in = new ByteArrayInputStream(doc.getFile());
-            BufferedImage bImageFromConvert = ImageIO.read(in);
-
-            ImageIO.write(bImageFromConvert, "jpg", newFile);
+            saveImage(doc, newFile);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void saveImage(FileUpload doc, File newFile) throws IOException {
+        InputStream in = new ByteArrayInputStream(doc.getFile());
+        BufferedImage bImageFromConvert = ImageIO.read(in);
+
+        ImageIO.write(bImageFromConvert, "jpg", newFile);
     }
 }

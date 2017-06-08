@@ -1,10 +1,12 @@
 package aipaishe;
 
 import aipaishe.models.FileUpload;
-import aipaishe.models.FileUploadFileBasedRepository;
 import aipaishe.models.FileUploadRepository;
+import aipaishe.models.PhotoLocation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by hillmon on 7/6/2017.
@@ -16,7 +18,7 @@ public class FileUploadService {
     FileUploadRepository fileUploadRepository;
 
     // Retrieve file
-    public FileUpload findByFileName(String filename) {
+    public List<PhotoLocation> findByEventId(String filename) {
         return fileUploadRepository.findByFileName(filename);
     }
 

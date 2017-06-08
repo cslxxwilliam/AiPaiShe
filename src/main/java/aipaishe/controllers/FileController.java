@@ -2,11 +2,9 @@ package aipaishe.controllers;
 
 import aipaishe.FileUploadService;
 import aipaishe.models.FileUpload;
-import aipaishe.models.FileUploadFileBasedRepository;
+import aipaishe.models.PhotoLocation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpSession;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by hillmon on 7/6/2017.
@@ -27,35 +26,12 @@ public class FileController {
 
     // Download a file
     @RequestMapping(
-            value = "/download",
+            value = "/photos",
             method = RequestMethod.GET
     )
-    public ResponseEntity downloadFile(@RequestParam("filename") String filename) {
-
-        FileUpload fileUpload = fileUploadService.findByFileName(filename);
-
-        // No file found based on the supplied filename
-        if (fileUpload == null) {
-            return new ResponseEntity<>("{}", HttpStatus.NOT_FOUND);
-        }
-
-        // Generate the http headers with the file properties
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("content-disposition", "attachment; filename=" + fileUpload.getFileName());
-
-        // Split the mimeType into primary and sub types
-        String primaryType, subType;
-        try {
-            primaryType = fileUpload.getMimeType().split("/")[0];
-            subType = fileUpload.getMimeType().split("/")[1];
-        }
-        catch (IndexOutOfBoundsException | NullPointerException ex) {
-            return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
-        headers.setContentType( new MediaType(primaryType, subType) );
-
-        return new ResponseEntity<>(fileUpload.getFile(), headers, HttpStatus.OK);
+    @ResponseBody
+    public List<PhotoLocation> downloadFile(@RequestParam("eventId") String eventId) {
+        return fileUploadService.findByEventId(eventId);
     }
 
     @RequestMapping(
@@ -74,6 +50,7 @@ public class FileController {
                 String filename = file.getOriginalFilename();
                 byte[] bytes = file.getBytes();
 
+                session.setAttribute("eventId", "1");
                 String eventId = (String)session.getAttribute("eventId");
                 FileUpload newFile = new FileUpload(eventId+"-"+filename, bytes, mimeType);
 
