@@ -17,6 +17,7 @@ import static java.util.stream.Collectors.toList;
  */
 @Component
 public class FileUploadFileBasedRepository implements FileUploadRepository{
+    public static final int BEGIN_INDEX = 8;
     @Autowired
     private Environment env;
 
@@ -37,7 +38,7 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
 
     private String getFullPathForExternal(String folderName, String fileName) {
         //remove ./public since web url does not need it
-        return folderName.concat(fileName).substring(8);
+        return folderName.concat(fileName).substring(BEGIN_INDEX);
     }
 
     @Override
