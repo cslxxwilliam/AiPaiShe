@@ -1,14 +1,20 @@
 angular.module('EventViewerApp', ['ngMaterial'])
     .component('eventDetail', {
         templateUrl: 'eventviewer.html',
-        controller: ['$http','$routeParams',
-          function EventDetailController($http,$routeParams) {
+        controller: ['$http','$routeParams','$scope',
+          function EventDetailController($http,$routeParams, $scope) {
             var self = this;
             self.readonly = true;
             $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response){
                         self.eventData = response.data;
                         // convert the returned date from millisecond to date type
                         self.eventDate = new Date(self.eventData.eventDate);
+                  }, function(error){
+                  alert('error when hitting server' + error);
+                  });
+
+            $http.get('photos?eventId=' + $routeParams.eventId).then(function(response){
+                        self.photoLocations = response.data
                   }, function(error){
                   alert('error when hitting server' + error);
                   });

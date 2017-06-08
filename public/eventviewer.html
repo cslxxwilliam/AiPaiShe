@@ -40,20 +40,8 @@
             <br>
             <div class="grid">
                 <div class="grid-sizer"></div>
-                <div class="grid-item">
-                    <img src=".\photos\1.jpg"/>
-                </div>
-                <div class="grid-item">
-                    <img src=".\photos\2.jpg"/>
-                </div>
-                <div class="grid-item">
-                    <img src=".\photos\3.jpg"/>
-                </div>
-                <div class="grid-item">
-                    <img src=".\photos\4.jpg"/>
-                </div>
-                <div class="grid-item">
-                    <img src=".\photos\5.jpg"/>
+                <div class="grid-item" ng-repeat="location in $ctrl.photoLocations">
+                    <img src="{{location.location}}"/>
                 </div>
             </div>
         </md-input-container>
