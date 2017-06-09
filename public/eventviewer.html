@@ -6,34 +6,20 @@
                 <span flex></span>
             </div>
         </md-toolbar>
-
         <md-input-container class="md-block ">
             <label class="my-date">Date</label>
             <md-datepicker ng-model="$ctrl.eventDate" md-hide-icons="calendar" ng-disabled="$ctrl.readonly"></md-datepicker>
         </md-input-container>
-
         <md-input-container class="md-block">
             <label>Name</label>
             <input ng-model="$ctrl.eventData.eventName" ng-disabled="$ctrl.readonly">
         </md-input-container>
-
         <md-input-container class="md-block">
-            <label >Venue</label>
+            <label>Venue</label>
             <input ng-model="$ctrl.eventData.eventVenue" ng-disabled="$ctrl.readonly">
         </md-input-container>
 
-        <!--<div>-->
-            <!--<div class="col-xs-6 col-xs-offset-3">-->
-                <!--<div class="well">-->
-
-        <form action="/upload" class="dropzone">
-            <div class="fallback">
-                <input name="file" type="file" multiple />
-            </div>
-        </form>
-            <!--</div>-->
-            <!--</div>-->
-        <!--</md-input-container>-->
+        <file-upload></file-upload>
 
         <md-input-container class="md-block">
             <label>Photos</label>
@@ -41,11 +27,9 @@
             <div class="grid">
                 <div class="grid-sizer"></div>
                 <div class="grid-item" ng-repeat="location in $ctrl.photoLocations">
-                    <img src="{{location.location}}"/>
+                    <img src="{{location.location}}" />
                 </div>
             </div>
         </md-input-container>
     </md-content>
-
-
 </div>
