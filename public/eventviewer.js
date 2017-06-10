@@ -10,13 +10,13 @@ angular.module('EventViewerApp', ['ngMaterial'])
                         // convert the returned date from millisecond to date type
                         self.eventDate = new Date(self.eventData.eventDate);
                   }, function(error){
-                  alert('error when hitting server' + error);
+                  console.log('error when hitting server' + error);
                   });
 
             $http.get('photos?eventId=' + $routeParams.eventId).then(function(response){
                         self.photoLocations = response.data
                   }, function(error){
-                  alert('error when hitting server' + error);
+                  console.log('error when hitting server' + error);
                   });
 
             var $grid = $('.grid').masonry({

@@ -3,7 +3,7 @@ angular.module('fileApp').directive('dropzone', function() {
         restrict: 'C',
         link: function(scope, element, attrs) {
 
-            alert('dropzone eventID ' + scope.eventId);
+            console.log('dropzone eventID ' + scope.eventId);
 
             var config = {
                 url: 'http://localhost:8080/upload',

@@ -1,16 +1,23 @@
+<md-input-container class="md-block" style="
+    margin-top: 0px;
+    margin-bottom: 0px;>
 <div class="col-xs-6 col-xs-offset-3">
+    <lable>Photos</lable>
     <div class="well">
         <form action="" class="dropzone" dropzone="" id="dropzone">
+            Select
+            <md-icon md-svg-src="img/icons/ic_photo.svg" class="name"></md-icon>
             <div class="dz-default dz-message">
             </div>
         </form>
     </div>
 </div>
 <div class="pull-right">
-    <button class="btn btn-success" ng-click="uploadFile()">Upload File</button>
-    <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
+    <md-button class="btn primary" ng-click="uploadFile()">Upload</md-button>
+    <md-button class="btn primary" ng-click="reset()">Cancel</md-button>
 </div>
 
 <script type="text/javascript">
 	Dropzone.autoDiscover = false;
 </script>
+</md-input-container>
