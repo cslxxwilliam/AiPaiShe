@@ -3,6 +3,8 @@ angular.module('fileApp').directive('dropzone', function() {
         restrict: 'C',
         link: function(scope, element, attrs) {
 
+            alert('dropzone eventID ' + scope.eventId);
+
             var config = {
                 url: 'http://localhost:8080/upload',
                 acceptedFiles: 'image/*',
@@ -10,7 +12,11 @@ angular.module('fileApp').directive('dropzone', function() {
                 paramName: "uploadfile",
                 maxThumbnailFilesize: 10,
                 parallelUploads: 1,
-                autoProcessQueue: false
+                autoProcessQueue: false,
+                sending: function(file, xhr, formData) {
+                   formData.append("event_id", scope.eventId);  //name and value
+                   formData.append("event_name", 'aipaishe'); //name and value
+                }
             };
 
             var eventHandlers = {
