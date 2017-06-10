@@ -35,27 +35,27 @@ angular.module('fileApp').directive('dropzone', function() {
 
             'complete': function (file) {
                 if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                    alert('Upload completed. ');
+                    console.log('Upload completed. ');
                     location.reload();
                 }
                 this.removeFile(file);
             }
 
-        };
+            };
 
-        dropzone = new Dropzone(element[0], config);
+            dropzone = new Dropzone(element[0], config);
 
-        angular.forEach(eventHandlers, function(handler, event) {
-            dropzone.on(event, handler);
-        });
+            angular.forEach(eventHandlers, function(handler, event) {
+                dropzone.on(event, handler);
+            });
 
-        scope.processDropzone = function() {
-            dropzone.processQueue();
-        };
+            scope.processDropzone = function() {
+                dropzone.processQueue();
+            };
 
-        scope.resetDropzone = function() {
-            dropzone.removeAllFiles();
+            scope.resetDropzone = function() {
+                dropzone.removeAllFiles();
+            }
         }
     }
-}
 });

@@ -24,11 +24,14 @@ angular.module('EventViewerApp', ['ngMaterial'])
                   percentPosition: true,
                   columnWidth: '.grid-sizer'
                 });
-                  // layout Isotope after each image loads
-                  $grid.imagesLoaded().progress( function() {
+            // layout Isotope after each image loads
+            $grid.imagesLoaded().progress( function() {
                     $grid.masonry();
-                  }
-                  );
+            });
+
+            function refreshPhotos(){
+
+            }
           }
         ]
       });
