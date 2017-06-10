@@ -16,38 +16,46 @@ angular.module('fileApp').directive('dropzone', function() {
                 sending: function(file, xhr, formData) {
                    formData.append("event_id", scope.eventId);  //name and value
                    formData.append("event_name", 'aipaishe'); //name and value
+               }
+           };
+
+           var eventHandlers = {
+            'addedfile': function(file) {
+                scope.file = file;
+                if (this.files[1]!=null) {
+                    this.removeFile(this.files[0]);
                 }
-            };
+                scope.$apply(function() {
+                    scope.fileAdded = true;
+                });
+            },
 
-            var eventHandlers = {
-                'addedfile': function(file) {
-                    scope.file = file;
-                    if (this.files[1]!=null) {
-                        this.removeFile(this.files[0]);
-                    }
-                    scope.$apply(function() {
-                        scope.fileAdded = true;
-                    });
-                },
+            'success': function (file, response) {
+            },
 
-                'success': function (file, response) {
+            'complete': function (file) {
+                if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                    alert('Upload completed. ');
+                    location.reload();
                 }
-
-            };
-
-            dropzone = new Dropzone(element[0], config);
-
-            angular.forEach(eventHandlers, function(handler, event) {
-                dropzone.on(event, handler);
-            });
-
-            scope.processDropzone = function() {
-                dropzone.processQueue();
-            };
-
-            scope.resetDropzone = function() {
-                dropzone.removeAllFiles();
+                this.removeFile(file);
             }
+
+        };
+
+        dropzone = new Dropzone(element[0], config);
+
+        angular.forEach(eventHandlers, function(handler, event) {
+            dropzone.on(event, handler);
+        });
+
+        scope.processDropzone = function() {
+            dropzone.processQueue();
+        };
+
+        scope.resetDropzone = function() {
+            dropzone.removeAllFiles();
         }
     }
+}
 });
