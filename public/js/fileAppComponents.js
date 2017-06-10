@@ -4,7 +4,7 @@ var uploadApp = angular.module('fileApp');
 
 var uploadComponent = {
         bindings: {
-            key: '='
+            eventId: '@'
         },
     //    template: uploadTemplate,
     templateUrl: 'fileupload.html',
@@ -24,7 +24,7 @@ function UploadComponentController($scope) {
     // $scope.eventId = this.eventId;
 
     // TODO: need to pass the event ID into this controller
-    alert('UploadComponentController eventId = ' + vm.eventId);
+    alert('UploadComponentController eventId = ' + this.eventId);
 
     $scope.uploadFile = function() {
         $scope.processDropzone();
