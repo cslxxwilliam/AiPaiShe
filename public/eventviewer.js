@@ -29,6 +29,10 @@ angular.module('EventViewerApp', ['ngMaterial'])
                     $grid.masonry();
             });
 
+            self.getEventId = function () {
+                return $routeParams.eventId;
+            }
+
             function refreshPhotos(){
 
             }

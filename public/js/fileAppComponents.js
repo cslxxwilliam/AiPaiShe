@@ -3,10 +3,9 @@ var uploadApp = angular.module('fileApp');
 //var uploadTemplate = require('../fileupload.html');
 
 var uploadComponent = {
-        bindings: {
-            eventId: '@'
-        },
-    //    template: uploadTemplate,
+    bindings: {
+        fileId: '&',
+    },
     templateUrl: 'fileupload.html',
     controller: UploadComponentController,
     controllerAs: 'uploadCtrl'
@@ -17,14 +16,14 @@ uploadApp.component('fileUpload', uploadComponent);
 UploadComponentController.$inject = ['$scope'];
 
 function UploadComponentController($scope) {
-    console.log("eventId: "+$scope.eventId);
-    $scope.filename = '';
-    // hard-coded event ID for demo only
-    $scope.eventId = 1;
-    // $scope.eventId = this.eventId;
 
-    // TODO: need to pass the event ID into this controller
-//    alert('UploadComponentController eventId = ' + this.eventId);
+    $scope.filename = '';
+
+    var vm = this;
+
+    vm.$onInit = function() {
+        $scope.eventId = vm.fileId();
+    };
 
     $scope.uploadFile = function() {
         $scope.processDropzone();

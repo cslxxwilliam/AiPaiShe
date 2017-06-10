@@ -19,7 +19,8 @@
             <input ng-model="$ctrl.eventData.eventVenue" ng-disabled="$ctrl.readonly">
         </md-input-container>
 
-        <file-upload eventId="$ctrl.eventData.eventId"></file-upload>
+        <file-upload file-id="$ctrl.getEventId()"></file-upload>
+
         <md-input-container class="md-block" style=" margin-top: 0px; margin-bottom: 0px;">
             <br>
             <div class="grid">
