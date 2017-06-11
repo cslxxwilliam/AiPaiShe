@@ -6,8 +6,8 @@ angular.module('fileApp').directive('dropzone', function() {
             var config = {
                 url: 'http://localhost:8080/upload',
                 acceptedFiles: 'image/*',
-                maxFilesize: 100,
-                paramName: "uploadfile",
+                maxFilesize: 20,
+                paramName: "dropzoneuploadfile",
                 maxThumbnailFilesize: 10,
                 parallelUploads: 1,
                 autoProcessQueue: false,
