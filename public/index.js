@@ -1,1 +1,1 @@
-angular.module('aipaisheApp',['aipaisheHomeDirective','EventViewerApp','fileApp','ngRoute','autocompleteDemo','dialogDemo']);
+angular.module('aipaisheApp',['ngRoute','ngMaterial']);
