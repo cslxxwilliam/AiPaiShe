@@ -34,15 +34,19 @@ angular.module('aipaisheApp').directive('dropzone', function() {
 
                 'complete': function(file) {
                     if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                        scope.showConfirmation('File uploaded!');
+                        // scope.showConfirmation('File uploaded!');
                         // location.reload();
                         // reload the photos by updating the photoLocations set in scope
-                        scope.refreshPhotos();
+                        // scope.refreshPhotos();
+
+                        scope.$emit ('uploadcomplete','Files uploaded successfully');
                     }
                     this.removeFile(file);
                 }
 
             };
+
+            Dropzone.autoDiscover = false;
 
             dropzone = new Dropzone(element[0], config);
 

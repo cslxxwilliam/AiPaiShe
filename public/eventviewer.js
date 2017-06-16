@@ -1,46 +1,54 @@
-angular.module('aipaisheApp')
-    .component('eventDetail', {
-        templateUrl: 'eventviewer.html',
-        controller: ['$http', '$routeParams', '$scope',
-            function EventDetailController($http, $routeParams, $scope) {
-                var self = this;
-                self.readonly = true;
-                $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response) {
-                    self.eventData = response.data;
-                    // convert the returned date from millisecond to date type
-                    self.eventDate = new Date(self.eventData.eventDate);
-                }, function(error) {
-                    console.log('error when hitting server' + error);
-                });
+var aipaisheApp = angular.module('aipaisheApp');
 
-                // load the event photos for the first time
-                $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
-                    self.photoLocations = response.data
-                }, function(error) {
-                    console.log('error when hitting server' + error);
-                });
+var eventDetailComponent = {
+    bindings: {},
+    templateUrl: 'eventviewer.html',
+    controller: EventDetailController,
+    controllerAs: 'vm'
+};
 
-                var $grid = $('.grid').masonry({
-                    itemSelector: '.grid-item',
-                    percentPosition: true,
-                    columnWidth: '.grid-sizer'
-                });
-                // layout Isotope after each image loads
-                $grid.imagesLoaded().progress(function() {
-                    $grid.masonry();
-                });
+aipaisheApp.component('eventDetail', eventDetailComponent);
 
-                self.getEventId = function() {
-                    return $routeParams.eventId;
-                }
+EventDetailController.$inject = ['$http', '$routeParams', '$scope'];
 
-                self.refreshPhotos = function() {
-                    $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
-                        self.photoLocations = response.data
-                    }, function(error) {
-                        console.log('error when hitting server' + error);
-                    });
-                }
-            }
-        ]
+function EventDetailController($http, $routeParams, $scope) {
+    var vm = this;
+    vm.readonly = true;
+    $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response) {
+        vm.eventData = response.data;
+        // convert the returned date from millisecond to date type
+        vm.eventDate = new Date(vm.eventData.eventDate);
+    }, function(error) {
+        console.log('error when hitting server' + error);
     });
+
+    // load the event photos for the first time
+    $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
+        vm.photoLocations = response.data
+    }, function(error) {
+        console.log('error when hitting server' + error);
+    });
+
+    var $grid = $('.grid').masonry({
+        itemSelector: '.grid-item',
+        percentPosition: true,
+        columnWidth: '.grid-sizer'
+    });
+    // layout Isotope after each image loads
+    $grid.imagesLoaded().progress(function() {
+        $grid.masonry();
+    });
+
+    vm.getEventId = function() {
+        return $routeParams.eventId;
+    }
+
+    // refresh the photos after file upload
+    $scope.$on('uploadcomplete', function(event, data) {
+        $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
+            vm.photoLocations = response.data
+        }, function(error) {
+            console.log('error when hitting server' + error);
+        });
+    });
+}

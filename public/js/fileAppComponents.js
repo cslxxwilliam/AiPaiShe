@@ -2,19 +2,18 @@ var aipaisheApp = angular.module('aipaisheApp');
 
 var uploadComponent = {
     bindings: {
-        fileEventId: '&',
-        refreshPhotos: '&'
+        fileEventId: '&'
     },
     templateUrl: 'fileupload.html',
     controller: UploadComponentController,
-    controllerAs: 'uploadCtrl'
+    controllerAs: 'vm'
 };
 
 aipaisheApp.component('fileUpload', uploadComponent);
 
-UploadComponentController.$inject = ['$scope','$mdDialog'];
+UploadComponentController.$inject = ['$scope', '$mdDialog'];
 
-function UploadComponentController($scope,$mdDialog) {
+function UploadComponentController($scope, $mdDialog) {
 
     $scope.filename = '';
 
@@ -42,23 +41,17 @@ function UploadComponentController($scope,$mdDialog) {
         });
     }
 
-    $scope.showConfirmation = function(msg) {
-        // Appending dialog to document.body to cover sidenav in docs app
-        // Modal dialogs should fully cover application
-        // to prevent interaction outside of dialog
+    $scope.$on('uploadcomplete', function(event, data) {
         $mdDialog.show(
-          $mdDialog.alert()
+            $mdDialog.alert()
             .parent(angular.element(document.querySelector('#popupContainer')))
             .clickOutsideToClose(true)
             .title('Confirmation')
-            .textContent(msg)
+            .textContent(data)
             .ariaLabel('Alert Dialog Demo')
             .ok('Got it!')
-            .targetEvent()
+            .targetEvent(event)
         );
-    }
+    });
 
-    $scope.refreshPhotos = function(){
-    vm.refreshPhotos();
-    }
 }

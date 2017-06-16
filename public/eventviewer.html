@@ -8,24 +8,24 @@
         </md-toolbar>
         <md-input-container class="md-block" style="margin-top: 40px;">
             <label class="my-date">Date</label>
-            <md-datepicker ng-model="$ctrl.eventDate" md-hide-icons="calendar" ng-disabled="$ctrl.readonly"></md-datepicker>
+            <md-datepicker ng-model="vm.eventDate" md-hide-icons="calendar" ng-disabled="vm.readonly"></md-datepicker>
         </md-input-container>
         <md-input-container class="md-block">
             <label>Name</label>
-            <input ng-model="$ctrl.eventData.eventName" ng-disabled="$ctrl.readonly">
+            <input ng-model="vm.eventData.eventName" ng-disabled="vm.readonly">
         </md-input-container>
         <md-input-container class="md-block">
             <label>Venue</label>
-            <input ng-model="$ctrl.eventData.eventVenue" ng-disabled="$ctrl.readonly">
+            <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
         </md-input-container>
 
-        <file-upload file-event-id="$ctrl.getEventId()" refresh-photos="$ctrl.refreshPhotos()"></file-upload>
+        <file-upload file-event-id="vm.getEventId()"></file-upload>
 
         <md-input-container class="md-block" style=" margin-top: 0px; margin-bottom: 0px;">
             <br>
             <div class="grid">
                 <div class="grid-sizer"></div>
-                <div class="grid-item" ng-repeat="location in $ctrl.photoLocations">
+                <div class="grid-item" ng-repeat="location in vm.photoLocations">
                     <img src="{{location.location}}" />
                 </div>
             </div>
