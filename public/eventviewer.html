@@ -1,25 +1,31 @@
 <div>
     <md-content class="md-padding">
+
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Event</h2>
                 <span flex></span>
             </div>
         </md-toolbar>
+
         <md-input-container class="md-block" style="margin-top: 40px;">
             <label class="my-date">Date</label>
             <md-datepicker ng-model="vm.eventDate" md-hide-icons="calendar" ng-disabled="vm.readonly"></md-datepicker>
         </md-input-container>
+
         <md-input-container class="md-block">
             <label>Name</label>
             <input ng-model="vm.eventData.eventName" ng-disabled="vm.readonly">
         </md-input-container>
+
         <md-input-container class="md-block">
             <label>Venue</label>
             <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
         </md-input-container>
 
-        <file-upload file-event-id="vm.getEventId()"></file-upload>
+        <md-input-container class="md-block">
+            <file-upload file-event-id="vm.getEventId()"></file-upload>
+        </md-input-container>
 
         <md-input-container class="md-block" style=" margin-top: 0px; margin-bottom: 0px;">
             <br>
@@ -30,5 +36,14 @@
                 </div>
             </div>
         </md-input-container>
+
+        <md-input-container class="md-block">
+        <div class="galleria">
+            <a ng-repeat="location in vm.photoLocations" href="{{location.location}}">
+                <img ng-src="{{location.location}}" data-title="Dummy title" data-description="Dummy description">
+            </a>
+        </div>
+        </md-input-container>
+
     </md-content>
 </div>

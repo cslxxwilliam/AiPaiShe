@@ -51,4 +51,10 @@ function EventDetailController($http, $routeParams, $scope) {
             console.log('error when hitting server' + error);
         });
     });
+
+    // initialize Galleria
+    (function() {
+        Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+        Galleria.run('.galleria');
+    }());
 }
