@@ -39,7 +39,8 @@
     <!--<script src="js/fileApp.js"></script>-->
     <!--<script src="js/fileAppControllers.js"></script>-->
     <script src="js/fileAppDirectives.js"></script>
-    <script src="js/fileAppComponents.js"></script>
+
+    <script src="js/headerComponents.js"></script>
 
     <link href="https://a0.muscache.com/airbnb/static/packages/common_o2.1-ba9aa41905017f9b44d1f9fbf1be1f27.css"
           media="all" rel="stylesheet" type="text/css">
@@ -49,28 +50,7 @@
           rel="stylesheet" type="text/css">
 <body>
 
-<div class="container" style="width: 100%; height:50px;">
-    <div class="logoContainer" style="float:left;width:15%">
-        <div align="center">
-            <span style="font-size:16px;color:#ff5a5f;display:block" class="font_1"><b>AiPaiShe</b></span>
-            <span style="font-size:14px;overflow:hidden" class="font_1">love goes on</span>
-        </div>
-    </div>
-    <div style="float:left;width:65%;height:inherit;color:#767676;background-color:#fff">
-    </div>
-    <div style="float:right;width:10%;height:inherit" class="pull-right">
-        <a style="text-align:center;height:inherit;color:#767676;background-color:#fff" href="http://www.airbnb.com"
-           class="hdr-btn aipaishe-header">
-            Login
-        </a>
-    </div>
-    <div style="float:right;width:10%;height:inherit" class="pull-right">
-        <a style="text-align:center;height:inherit;color:#767676;background-color:#fff" href="http://www.airbnb.com"
-           class="hdr-btn aipaishe-header">
-            Signup
-        </a>
-    </div>
-</div>
+<aipaishe-header></aipaishe-header>
 
 <ng-view></ng-view>
 
