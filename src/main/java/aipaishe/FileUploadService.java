@@ -23,7 +23,7 @@ public class FileUploadService {
     }
 
     // Upload the file
-    public void uploadFile(FileUpload doc) {
-        fileUploadRepository.save(doc);
+    public void uploadFile(FileUpload doc, byte[] fileBytes) {
+        fileUploadRepository.save(doc,fileBytes);
     }
 }

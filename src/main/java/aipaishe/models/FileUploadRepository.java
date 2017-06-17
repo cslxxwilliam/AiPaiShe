@@ -8,5 +8,5 @@ import java.util.List;
 public interface FileUploadRepository {
     List<PhotoLocation> findByFileName(String filename);
 
-    void save(FileUpload doc);
+    void save(FileUpload doc, byte[] fileBytes);
 }

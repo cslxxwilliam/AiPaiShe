@@ -56,34 +56,28 @@ public class FileController {
         */
 
         // retrieve the HTTP request parameters
-        String eventId = request.getParameter("event_id");
+        long eventId = Long.parseLong(request.getParameter("event_id"));
         String eventName = request.getParameter("event_name");
 
-        if (!eventId.isEmpty()) {
-            try {
-                Iterator<String> itr = request.getFileNames();
+        try {
+            Iterator<String> itr = request.getFileNames();
 
-                while (itr.hasNext()) {
-                    String uploadedFile = itr.next();
-                    MultipartFile file = request.getFile(uploadedFile);
-                    String mimeType = file.getContentType();
-                    String filename = file.getOriginalFilename();
-                    byte[] bytes = file.getBytes();
+            while (itr.hasNext()) {
+                String uploadedFile = itr.next();
+                MultipartFile file = request.getFile(uploadedFile);
+                String mimeType = file.getContentType();
+                String filename = file.getOriginalFilename();
+                byte[] bytes = file.getBytes();
 
-                    FileUpload newFile = new FileUpload(eventId + "-" + filename, bytes, mimeType);
+                FileUpload newFile = new FileUpload(eventId, eventId + "-" + filename, mimeType, "");
 
-                    fileUploadService.uploadFile(newFile);
-                }
-            } catch (Exception e) {
-                return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
+                fileUploadService.uploadFile(newFile,bytes);
             }
-
-            return new ResponseEntity<>("{}", HttpStatus.OK);
-
-        } else {
-
-            return new ResponseEntity<>("{}", HttpStatus.BAD_REQUEST);
-
+        } catch (Exception e) {
+            return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        return new ResponseEntity<>("{}", HttpStatus.OK);
+
     }
 }

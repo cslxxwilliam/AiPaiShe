@@ -42,25 +42,35 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
     }
 
     @Override
-    public void save(FileUpload doc) {
+    public void save(FileUpload doc, byte[] fileBytes) {
         String fileSavePath = env.getProperty("file.save.path");
-        File newFile = new File(fileSavePath + doc.getFileName());
+        String pathName = fileSavePath + doc.getFileName();
+        File newFile = new File(pathName);
 
         try {
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
 
-            saveImage(doc, newFile);
+            saveImage(doc, fileBytes, newFile);
+
+            doc.setSrcPath(pathName);
+            fileUploadDao.create(doc);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void saveImage(FileUpload doc, File newFile) throws IOException {
-        InputStream in = new ByteArrayInputStream(doc.getFile());
-        BufferedImage bImageFromConvert = ImageIO.read(in);
 
+    private void saveImage(FileUpload doc, byte[] fileBytes, File newFile) throws IOException {
+        // InputStream in = new ByteArrayInputStream(doc.getFile());
+        InputStream in = new ByteArrayInputStream(fileBytes);
+        BufferedImage bImageFromConvert = ImageIO.read(in);
         ImageIO.write(bImageFromConvert, "jpg", newFile);
     }
+
+    @Autowired
+    private FileUploadDao fileUploadDao;
+
 }
