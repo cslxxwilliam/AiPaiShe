@@ -8,7 +8,7 @@ angular.module('aipaisheApp')
     $scope.status = '  ';
     $scope.customFullscreen = false;
 
-    $scope.showPrompt = function(ev) {
+    $scope.showPrompt = function(event) {
         // Appending dialog to document.body to cover sidenav in docs app
         var confirm = $mdDialog.prompt()
             .title('Which event do you want to join?')
@@ -16,7 +16,7 @@ angular.module('aipaisheApp')
             .placeholder('Event ID')
             .ariaLabel('Event ID')
             .initialValue('')
-            .targetEvent(ev)
+            .targetEvent(event)
             .ok('Join!')
             .cancel('Cancel');
 

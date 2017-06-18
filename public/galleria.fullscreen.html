@@ -1,0 +1,10 @@
+<div>
+    <p>Galleria Fullscreen Mode</p>
+</div>
+<md-input-container class="md-block">
+    <div id="galleriafullscreen">
+        <a ng-repeat="location in vm.photoLocations" ng-href="{{location.location}}">
+            <img ng-src="{{location.location}}" data-title="Dummy title" data-description="Dummy description">
+        </a>
+    </div>
+</md-input-container>

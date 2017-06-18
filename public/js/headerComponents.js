@@ -14,6 +14,6 @@ HeaderComponentController.$inject = ['$scope'];
 function HeaderComponentController($scope) {
     var vm = this;
 
-    this.username = "Pleae login...";
+    this.username = "Please login...";
 
 }

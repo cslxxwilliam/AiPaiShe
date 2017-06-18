@@ -46,15 +46,39 @@ function EventDetailController($http, $routeParams, $scope) {
     // refresh the photos after file upload
     $scope.$on('uploadcomplete', function(event, data) {
         $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
-            vm.photoLocations = response.data
+            vm.photoLocations = response.data;
         }, function(error) {
             console.log('error when hitting server' + error);
         });
     });
 
     // initialize Galleria
-    (function() {
+
         Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
         Galleria.run('.galleria');
-    }());
+
+
+        // Galleria.loadTheme('galleria/themes/fullscreen/galleria.fullscreen.min.js');
+        // Galleria.run('.galleria');
+
+    Galleria.ready(function(options) {
+
+        // 'this' is the gallery instance
+        // 'options' is the gallery options
+
+        var galleria = this;
+
+        this.bind('image', function(e) {
+            Galleria.log('Now viewing ' + e.imageTarget.src);
+        });
+
+        $('#fullscreenBtn').click(function() {
+            galleria.toggleFullscreen(); // toggles the fullscreen
+           });
+    });
+
+//    (function() {
+//        Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+//        Galleria.run('.galleria');
+//    }());
 }

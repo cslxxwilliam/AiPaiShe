@@ -32,18 +32,20 @@
             <div class="grid">
                 <div class="grid-sizer"></div>
                 <div class="grid-item" ng-repeat="location in vm.photoLocations">
-                    <img src="{{location.location}}" />
+                    <img ng-src="{{location.location}}" />
                 </div>
             </div>
         </md-input-container>
 
         <md-input-container class="md-block">
         <div class="galleria">
-            <a ng-repeat="location in vm.photoLocations" href="{{location.location}}">
+            <a ng-repeat="location in vm.photoLocations" ng-href="{{location.location}}">
                 <img ng-src="{{location.location}}" data-title="Dummy title" data-description="Dummy description">
             </a>
         </div>
         </md-input-container>
+
+        <md-button id="fullscreenBtn" class="md-raised">Enter Fullscreen Mode</md-button>
 
     </md-content>
 </div>
