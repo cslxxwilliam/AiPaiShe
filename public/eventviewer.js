@@ -12,8 +12,20 @@ aipaisheApp.component('eventDetail', eventDetailComponent);
 EventDetailController.$inject = ['$http', '$routeParams', '$scope'];
 
 function EventDetailController($http, $routeParams, $scope) {
+
     var vm = this;
+
     vm.readonly = true;
+
+    vm.galleriaAlbum = [];
+
+    Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+    Galleria.run('.galleria', {
+        dataSource: vm.galleriaAlbum
+    });
+
+    console.log(Galleria.get(0));
+
     $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response) {
         vm.eventData = response.data;
         // convert the returned date from millisecond to date type
@@ -54,49 +66,40 @@ function EventDetailController($http, $routeParams, $scope) {
         });
     });
 
-    var galleriaAlbum = [{'image':''}];
-
-    Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
-    Galleria.run('.galleria', {
-        dataSource: galleriaAlbum,
-        autoplay: false,
-    });
-
     // function for refreshing the Gallery
     vm.refreshGallery = function() {
         console.log('refreshing gallery...');
         var count = 0;
-        galleriaAlbum = [];
-        // galleriaAlbum = [{'image':'photos/1.jpg'}];
-        console.log('galleriaAlbum: ' + galleriaAlbum);
+
+        vm.galleriaAlbum.splice(0,vm.galleriaAlbum.length);
 
         vm.photoLocations.forEach(function(locationData) {
             count = count + 1;
             var jsonData = {};
             var locationPath = locationData.location;
             jsonData['image'] = locationPath;
-            jsonData['title'] = 'Event Title';
-            jsonData['description'] = 'Uploaded Photo ' + count;
-            galleriaAlbum.push(jsonData);
+            jsonData['thumb'] = locationPath;
+            jsonData['big'] = locationPath;
+            jsonData['title'] = 'Event Title ' + count;
+            jsonData['description'] = 'Photo Description ' + count;
+            vm.galleriaAlbum.push(jsonData);
         });
 
-        console.log(galleriaAlbum);
-        Galleria.get(0).load(galleriaAlbum);
+        Galleria.get(0).load(vm.galleriaAlbum);
     }
 
     Galleria.ready(function(options) {
-        console.log('ready...');
+        console.log('Galleria is ready...');
+
         // 'this' is the gallery instance
         // 'options' is the gallery options
         var gallery = this;
 
-        gallery.load(galleriaAlbum);
-
-        this.bind('image', function(e) {
+        gallery.bind('image', function(e) {
             Galleria.log('Now viewing ' + e.imageTarget.src);
 
             // lets make galleria open a lightbox when clicking the main image:
-            $(e.imageTarget).click(this.proxy(function() {
+            $(e.imageTarget).click(gallery.proxy(function() {
                 // Toggle Fullscreen Mode
                 // gallery.toggleFullscreen();
                 // Open a Lightbox
@@ -104,5 +107,12 @@ function EventDetailController($http, $routeParams, $scope) {
             }));
         });
 
+    });
+
+    Galleria.on('data',function(){
+        var gallery = this;
+        window.setTimeout(function(){
+            gallery.lazyLoadChunks(3);
+        },10);
     });
 }
