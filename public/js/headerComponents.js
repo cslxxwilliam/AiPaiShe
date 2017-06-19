@@ -9,11 +9,14 @@ var headerComponent = {
 
 aipaisheApp.component('aipaisheHeader', headerComponent);
 
-HeaderComponentController.$inject = ['$scope'];
+HeaderComponentController.$inject = ['$scope', '$location'];
 
-function HeaderComponentController($scope) {
+function HeaderComponentController($scope, $location) {
     var vm = this;
 
-    this.username = "Please login...";
+    this.username = "Gal Gadot (Wonder Woman)";
 
+    $scope.signUp = function(){
+         $location.path('/signup');
+    }
 }

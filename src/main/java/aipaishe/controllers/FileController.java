@@ -40,21 +40,6 @@ public class FileController {
             method = RequestMethod.POST
     )
     public ResponseEntity uploadFile(MultipartHttpServletRequest request) {
-        /*
-        Map<String, String[]> map = request.getParameterMap();
-        //Reading the Map
-        //Works for GET && POST Method
-        for(String paramName:map.keySet()) {
-            String[] paramValues = map.get(paramName);
-
-            //Get Values of Param Name
-            for(String valueOfParam:paramValues) {
-                //Output the Values
-                System.out.println("Value of Param with Name "+paramName+": "+valueOfParam);
-            }
-        }
-        */
-
         // retrieve the HTTP request parameters
         long eventId = Long.parseLong(request.getParameter("event_id"));
         String eventName = request.getParameter("event_name");

@@ -13,6 +13,9 @@ angular.module('aipaisheApp')
         when('/event/:eventId', {
             template: '<event-detail></event-detail>'
         }).
+        when('/signup',{
+            template: '<user-registration></user-registration>'
+        }).
         otherwise('/home');
     }
 ]);

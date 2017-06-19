@@ -2,6 +2,7 @@ package aipaishe.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,10 @@ public class User {
 
     @NotNull
     private String name;
+    private String firstName;
+    private String lastName;
+    private String password;
+//    private List<String> roles;
 
 
     // Public methods
@@ -57,4 +62,20 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+//    public void setRoles(List<String> roles) {
+//        this.roles = roles;
+//    }
 }

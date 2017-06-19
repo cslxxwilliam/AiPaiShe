@@ -1,0 +1,42 @@
+<div>
+    <!--<aipaishe-header></aipaishe-header>-->
+        <md-content class="md-padding">
+
+            <md-toolbar>
+                <div class="md-toolbar-tools">
+                    <h2>Sign Up</h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+
+            <md-input-container class="md-block">
+                <label>First Name</label>
+                <input ng-model="vm.eventData.eventName" ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Last Name</label>
+                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Email Address</label>
+                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+            </md-input-container>
+
+            <md-input-container layout="row" class="pull-right">
+                <md-button ng-click="reset()">
+                    Reset
+                </md-button>
+                <md-button ng-click="confirm()">
+                    Confirm
+                </md-button>
+            </md-input-container>
+
+        </md-content>
+</div>
