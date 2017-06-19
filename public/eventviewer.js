@@ -24,7 +24,8 @@ function EventDetailController($http, $routeParams, $scope) {
 
     // load the event photos for the first time
     $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
-        vm.photoLocations = response.data
+        vm.photoLocations = response.data;
+        vm.refreshGallery();
     }, function(error) {
         console.log('error when hitting server' + error);
     });
@@ -47,38 +48,61 @@ function EventDetailController($http, $routeParams, $scope) {
     $scope.$on('uploadcomplete', function(event, data) {
         $http.get('photos?eventId=' + $routeParams.eventId).then(function(response) {
             vm.photoLocations = response.data;
+            vm.refreshGallery();
         }, function(error) {
             console.log('error when hitting server' + error);
         });
     });
 
-    // initialize Galleria
+    var galleriaAlbum = [{'image':''}];
 
-        Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
-        Galleria.run('.galleria');
+    Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
+    Galleria.run('.galleria', {
+        dataSource: galleriaAlbum,
+        autoplay: false,
+    });
 
+    // function for refreshing the Gallery
+    vm.refreshGallery = function() {
+        console.log('refreshing gallery...');
+        var count = 0;
+        galleriaAlbum = [];
+        // galleriaAlbum = [{'image':'photos/1.jpg'}];
+        console.log('galleriaAlbum: ' + galleriaAlbum);
 
-        // Galleria.loadTheme('galleria/themes/fullscreen/galleria.fullscreen.min.js');
-        // Galleria.run('.galleria');
+        vm.photoLocations.forEach(function(locationData) {
+            count = count + 1;
+            var jsonData = {};
+            var locationPath = locationData.location;
+            jsonData['image'] = locationPath;
+            jsonData['title'] = 'Event Title';
+            jsonData['description'] = 'Uploaded Photo ' + count;
+            galleriaAlbum.push(jsonData);
+        });
+
+        console.log(galleriaAlbum);
+        Galleria.get(0).load(galleriaAlbum);
+    }
 
     Galleria.ready(function(options) {
-
+        console.log('ready...');
         // 'this' is the gallery instance
         // 'options' is the gallery options
+        var gallery = this;
 
-        var galleria = this;
+        gallery.load(galleriaAlbum);
 
         this.bind('image', function(e) {
             Galleria.log('Now viewing ' + e.imageTarget.src);
+
+            // lets make galleria open a lightbox when clicking the main image:
+            $(e.imageTarget).click(this.proxy(function() {
+                // Toggle Fullscreen Mode
+                // gallery.toggleFullscreen();
+                // Open a Lightbox
+                gallery.openLightbox();
+            }));
         });
 
-        $('#fullscreenBtn').click(function() {
-            galleria.toggleFullscreen(); // toggles the fullscreen
-           });
     });
-
-//    (function() {
-//        Galleria.loadTheme('galleria/themes/classic/galleria.classic.min.js');
-//        Galleria.run('.galleria');
-//    }());
 }

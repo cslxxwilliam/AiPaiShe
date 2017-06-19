@@ -27,6 +27,10 @@
             <file-upload file-event-id="vm.getEventId()"></file-upload>
         </md-input-container>
 
+        <md-input-container class="md-block">
+            <div class="galleria"></div>
+        </md-input-container>
+
         <md-input-container class="md-block" style=" margin-top: 0px; margin-bottom: 0px;">
             <br>
             <div class="grid">
@@ -36,16 +40,6 @@
                 </div>
             </div>
         </md-input-container>
-
-        <md-input-container class="md-block">
-        <div class="galleria">
-            <a ng-repeat="location in vm.photoLocations" ng-href="{{location.location}}">
-                <img ng-src="{{location.location}}" data-title="Dummy title" data-description="Dummy description">
-            </a>
-        </div>
-        </md-input-container>
-
-        <md-button id="fullscreenBtn" class="md-raised">Enter Fullscreen Mode</md-button>
 
     </md-content>
 </div>
