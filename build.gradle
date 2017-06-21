@@ -27,6 +27,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("mysql:mysql-connector-java")
 
+    compile 'javax.mail:mail:1.4.1'
+
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
