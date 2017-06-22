@@ -22,7 +22,7 @@ public class SSLEmail {
     public static void main(String[] args) {
         final String fromEmail = "projectourwedding@gmail.com"; //requires valid gmail id
         final String password = "aipaishe2015"; // correct password for gmail id
-        final String toEmail = "projectourwedding@gmail.com"; // can be any email id
+        final String toEmail = "cslxxwilliam@gmail.com"; // can be any email id
 
         System.out.println("SSLEmail Start");
         Properties props = new Properties();
