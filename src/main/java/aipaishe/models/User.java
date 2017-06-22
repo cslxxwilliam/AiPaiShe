@@ -7,23 +7,22 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User {
-
-    // The entity fields (private)
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull
+    @Column(unique=true)
     private String email;
 
     @NotNull
-    private String name;
     private String firstName;
-    private String lastName;
-    private String password;
-//    private List<String> roles;
 
+    @NotNull
+    private String lastName;
+
+    @NotNull
+    private String password;
 
     // Public methods
 
@@ -34,9 +33,12 @@ public class User {
         this.id = id;
     }
 
-    public User(String email, String name) {
+    public User(long id, String email, String firstName, String lastName, String password) {
+        this.id = id;
         this.email = email;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
     }
 
     public long getId() {
@@ -55,14 +57,6 @@ public class User {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -75,7 +69,26 @@ public class User {
         this.password = password;
     }
 
-//    public void setRoles(List<String> roles) {
-//        this.roles = roles;
-//    }
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

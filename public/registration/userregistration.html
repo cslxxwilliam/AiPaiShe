@@ -2,6 +2,7 @@
     <!--<aipaishe-header></aipaishe-header>-->
         <md-content class="md-padding">
 
+            <form name="signupForm">
             <md-toolbar>
                 <div class="md-toolbar-tools">
                     <h2>Sign Up</h2>
@@ -11,29 +12,29 @@
 
             <md-input-container class="md-block">
                 <label>First Name</label>
-                <input ng-model="vm.eventData.eventName" ng-disabled="vm.readonly">
+                <input ng-model="vm.firstName">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Last Name</label>
-                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+                <input ng-model="vm.lastName">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Email Address</label>
-                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+                <input ng-model="vm.email">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input ng-model="vm.eventData.eventVenue" ng-disabled="vm.readonly">
+                <input ng-model="vm.password" type="password">
             </md-input-container>
-
+            </form>
             <md-input-container layout="row" class="pull-right">
-                <md-button ng-click="reset()">
+                <md-button ng-click="vm.reset()">
                     Reset
                 </md-button>
-                <md-button ng-click="confirm()">
+                <md-button ng-click="vm.confirm()">
                     Confirm
                 </md-button>
             </md-input-container>

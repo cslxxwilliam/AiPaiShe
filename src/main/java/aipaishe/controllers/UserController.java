@@ -15,23 +15,6 @@ import java.util.List;
 public class UserController {
 
     /**
-     * Create a new user with an auto-generated id and email and name as passed
-     * values.
-     */
-    @RequestMapping(value="/createuser")
-    @ResponseBody
-    public String create(@RequestParam(value="email")String email, @RequestParam(value="name")String name) {
-        try {
-            User user = new User(email, name);
-            userDao.create(user);
-        }
-        catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
-        }
-        return "User succesfully created!";
-    }
-
-    /**
      * Delete the user with the passed id.
      */
     @RequestMapping(value="/deleteuser")
@@ -100,11 +83,12 @@ public class UserController {
      */
     @RequestMapping(value="/updateuser")
     @ResponseBody
-    public String updateName(long id, String email, String name) {
+    public String updateName(long id, String email, String firstName, String lastName) {
         try {
             User user = userDao.getById(id);
             user.setEmail(email);
-            user.setName(name);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
             userDao.update(user);
         }
         catch (Exception ex) {
