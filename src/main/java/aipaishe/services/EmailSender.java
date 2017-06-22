@@ -13,11 +13,11 @@ import java.util.Properties;
  */
 @Component
 public class EmailSender {
-    public static void sendEmail(){
+    public static void sendEmail(String toEmailAddress){
     final String fromEmail = "projectourwedding@gmail.com"; //requires valid gmail id
     final String password = "aipaishe2015"; // correct password for gmail id
 //    final String toEmail = "cslxxwilliam@gmail.com"; // can be any email id
-    final String toEmail = "hillmon919@gmail.com"; // can be any email id
+    final String toEmail = toEmailAddress; // can be any email id
 
         System.out.println("TLSEmail Start");
     Properties props = new Properties();

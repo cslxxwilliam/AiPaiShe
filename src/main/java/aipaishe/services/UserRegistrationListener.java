@@ -44,6 +44,6 @@ public class UserRegistrationListener implements ApplicationListener<OnRegistrat
 //        email.setTo(recipientAddress);
 //        email.setSubject(subject);
 //        email.setText(message + " rn" + "http://localhost:8080" + confirmationUrl);
-        emailSender.sendEmail();
+        emailSender.sendEmail(user.getEmail());
     }
 }
