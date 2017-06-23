@@ -12,31 +12,33 @@
 
             <md-input-container class="md-block">
                 <label>First Name</label>
-                <input ng-model="vm.firstName">
+                <input ng-model="vm.firstName" ng-disabled="vm.loading">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Last Name</label>
-                <input ng-model="vm.lastName">
+                <input ng-model="vm.lastName" ng-disabled="vm.loading">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Email Address</label>
-                <input ng-model="vm.email">
+                <input ng-model="vm.email" ng-disabled="vm.loading">
             </md-input-container>
 
             <md-input-container class="md-block">
                 <label>Password</label>
-                <input ng-model="vm.password" type="password">
+                <input ng-model="vm.password" type="password" ng-disabled="vm.loading">
             </md-input-container>
             </form>
             <md-input-container layout="row" class="pull-right">
-                <md-button ng-click="vm.reset()">
+                <md-button ng-click="vm.reset()" ng-show="!vm.loading">
                     Reset
                 </md-button>
-                <md-button ng-click="vm.confirm()">
+                <md-button ng-click="vm.confirm()" ng-show="!vm.loading">
                     Confirm
                 </md-button>
+                <md-progress-circular md-mode="indeterminate" md-diameter="20" ng-show="vm.loading"
+                ></md-progress-circular>
             </md-input-container>
 
         </md-content>

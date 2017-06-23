@@ -17,11 +17,14 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
     vm.lastName=null;
     vm.email=null;
     vm.password=null;
+    vm.loading=false;
 
     vm.confirm = function(){
+        vm.loading=true;
         var user ={"firstName": vm.firstName, "lastName":vm.lastName, "email":vm.email, "password":vm.password};
         $http.post("/user/registration", user).then(function(response){
             console.log("successfully signup!")
+             vm.loading=false;
              $mdDialog.show({
                             controller: DialogController,
                             templateUrl: './registration/signup.confirmation.html',
@@ -29,7 +32,7 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
                             preserveScope: true,
                             parent: angular.element(document.body),
                             targetEvent: event,
-                            clickOutsideToClose: true,
+                            clickOutsideToClose: false,
                             fullscreen: false // Only for -xs, -sm breakpoints.
                         })
                         .then(function(answer) {
@@ -38,7 +41,11 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
                         }, function(error) {
                             $scope.status = 'You cancelled the dialog.';
                         });
-            }, function(error){console.log("failed to signup...")})
+            }, function(error){
+                console.log("failed to signup...");
+                vm.loading=false;
+
+                })
     };
 
     vm.reset = function(){
@@ -46,6 +53,7 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
         vm.lastName=null;
         vm.email=null;
         vm.password=null;
+        vm.loading=false;
     };
 
 
