@@ -23,7 +23,7 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
         vm.loading=true;
         var user ={"firstName": vm.firstName, "lastName":vm.lastName, "email":vm.email, "password":vm.password};
         $http.post("/user/registration", user).then(function(response){
-            console.log("successfully signup!")
+            console.log("successfully signup!");
              vm.loading=false;
              $mdDialog.show({
                             controller: DialogController,
@@ -44,7 +44,7 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
             }, function(error){
                 console.log("failed to signup...");
                 vm.loading=false;
-``                $mdDialog.show({
+                $mdDialog.show({
                             controller: DialogController,
                             templateUrl: './registration/signup.error.html',
                             scope: $scope,

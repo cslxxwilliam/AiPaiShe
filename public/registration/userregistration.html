@@ -29,6 +29,11 @@
                 <label>Password</label>
                 <input ng-model="vm.password" type="password" ng-disabled="vm.loading">
             </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Password Confirmation</label>
+                <input ng-model="vm.passwordConfirmation" type="password" ng-disabled="vm.loading">
+            </md-input-container>
             </form>
             <md-input-container layout="row" class="pull-right">
                 <md-button ng-click="vm.reset()" ng-show="!vm.loading">
