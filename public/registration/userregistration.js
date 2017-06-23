@@ -44,7 +44,21 @@ function UserRegistrationController($http, $routeParams, $scope, $mdDialog, $loc
             }, function(error){
                 console.log("failed to signup...");
                 vm.loading=false;
-
+``                $mdDialog.show({
+                            controller: DialogController,
+                            templateUrl: './registration/signup.error.html',
+                            scope: $scope,
+                            preserveScope: true,
+                            parent: angular.element(document.body),
+                            targetEvent: event,
+                            clickOutsideToClose: false,
+                            fullscreen: false // Only for -xs, -sm breakpoints.
+                        })
+                        .then(function(answer) {
+                            $scope.status = 'OK';
+                        }, function(error) {
+                            $scope.status = 'You cancelled the dialog.';
+                        });
                 })
     };
 

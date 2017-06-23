@@ -6,6 +6,8 @@ import aipaishe.models.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
@@ -34,7 +36,7 @@ public class UserRegistrationController {
      */
     @RequestMapping(value = "/user/registration", method = POST)
     @ResponseBody
-    public Map signup(@RequestBody User user, WebRequest request) {
+    public ResponseEntity signup(@RequestBody User user, WebRequest request) {
         try {
             System.out.println("User: " + user);
 
@@ -49,12 +51,10 @@ public class UserRegistrationController {
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (user, request.getContextPath()));
         } catch (Exception ex) {
-            Map result = new HashMap<String, String>();
-            result.put("message", "Error creating the user: " + ex.toString());
-            return result;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the user: " + ex.toString());
         }
-        Map result = new HashMap<String, String>();
-        result.put("message", "User succesfully created!");
-        return result;
+        HashMap<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "Sign up successful");
+        return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 }
