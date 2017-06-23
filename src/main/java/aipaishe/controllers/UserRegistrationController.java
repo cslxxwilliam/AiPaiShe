@@ -12,6 +12,9 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.persistence.NoResultException;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -31,7 +34,7 @@ public class UserRegistrationController {
      */
     @RequestMapping(value = "/user/registration", method = POST)
     @ResponseBody
-    public String signup(@RequestBody User user, WebRequest request) {
+    public Map signup(@RequestBody User user, WebRequest request) {
         try {
             System.out.println("User: " + user);
 
@@ -46,8 +49,12 @@ public class UserRegistrationController {
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (user, request.getContextPath()));
         } catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
+            Map result = new HashMap<String, String>();
+            result.put("message", "Error creating the user: " + ex.toString());
+            return result;
         }
-        return "User succesfully created!";
+        Map result = new HashMap<String, String>();
+        result.put("message", "User succesfully created!");
+        return result;
     }
 }
