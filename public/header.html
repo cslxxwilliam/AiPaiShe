@@ -6,16 +6,16 @@
         </div>
     </div>
     <div style="float:left;width:65%;height:inherit;color:#767676;background-color:#fff">
-        {{vm.username}}
+        Hello {{vm.username}}!
     </div>
-    <div style="float:right;width:10%;height:inherit" class="pull-right">
-        <a style="text-align:center;height:inherit;color:#767676;background-color:#fff" href="http://www.airbnb.com"
+    <div style="float:right;width:10%;height:inherit" class="pull-right" ng-hide="vm.isLogin">
+        <a style="text-align:center;height:inherit;color:#767676;background-color:#fff" ng-click="vm.login()"
            class="hdr-btn aipaishe-header">
             Login
         </a>
     </div>
-    <div style="float:right;width:10%;height:inherit" class="pull-right">
-        <span style="text-align:center;height:inherit;color:#767676;background-color:#fff;cursor:pointer" ng-click="signUp()"
+    <div style="float:right;width:10%;height:inherit" class="pull-right" ng-hide="vm.isLogin">
+        <span style="text-align:center;height:inherit;color:#767676;background-color:#fff;cursor:pointer" ng-click="vm.signUp()"
               class="hdr-btn aipaishe-header">
             Signup
         </span>
