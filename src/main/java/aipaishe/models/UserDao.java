@@ -73,6 +73,23 @@ public class UserDao {
         return;
     }
 
+
+    /**
+     * Verify the passed user email and password in the database.
+     */
+    public User verifyUserLogin(String email, String password) {
+        User rtnUser = this.getByEmail(email);
+        if (rtnUser != null){
+            if (rtnUser.getPassword().equals(password))
+                return rtnUser;
+            else
+                return null;
+        }
+        else {
+            return null;
+        }
+    }
+
     // Private fields
 
     // An EntityManager will be automatically injected from entityManagerFactory

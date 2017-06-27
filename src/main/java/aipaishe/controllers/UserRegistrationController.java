@@ -43,7 +43,7 @@ public class UserRegistrationController {
             try {
                 if(userDao.getByEmail(user.getEmail())!=null){
                     throw new Exception("Email already exists");
-                };
+                }
             } catch (EmptyResultDataAccessException e) {
                 userDao.create(user);
             }
@@ -56,5 +56,26 @@ public class UserRegistrationController {
         HashMap<String, String> responseBody = new HashMap<>();
         responseBody.put("message", "Sign up successful");
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+    }
+
+    /**
+     * Create a new user with an auto-generated id and email and name as passed
+     * values.
+     */
+    @RequestMapping(value = "/user/login")
+    @ResponseBody
+    public ResponseEntity userLogin(String email, String password) {
+        User rtnUser = userDao.verifyUserLogin(email,password);
+        if (rtnUser != null) {
+            HashMap<String, String> responseBody = new HashMap<>();
+            responseBody.put("message", "Sign up successful");
+            responseBody.put("username", rtnUser.getLastName() + " " + rtnUser.getFirstName());
+            responseBody.put("userid", String.valueOf(rtnUser.getId()));
+            responseBody.put("useremail",rtnUser.getEmail());
+            return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password");
+        }
     }
 }
