@@ -36,7 +36,7 @@ public class EmailSender {
     Session session = Session.getInstance(props, auth);
 
         EmailUtil.sendEmail(session, toEmail,"AiPaiShe User Registration", "Congratulations! You have successfully registered in AiPaiShe with member ID "+userId +
-                ".\\n Please click the link below to active your account: "+confirmationUrl);
+                ".\n Please click the link below to active your account: "+confirmationUrl);
     }
 
 }
