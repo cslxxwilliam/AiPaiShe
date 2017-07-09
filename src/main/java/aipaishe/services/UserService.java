@@ -2,13 +2,14 @@ package aipaishe.services;
 
 import aipaishe.models.EmailExistsException;
 import aipaishe.models.User;
-import aipaishe.models.UserDao;
+import aipaishe.services.repositories.UserDao;
 import aipaishe.models.UserDto;
+import aipaishe.models.userregistration.VerificationToken;
+import aipaishe.services.repositories.VerificationTokenDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 
 /**
  * Created by williamxuxianglin on 19/6/17.
@@ -16,7 +17,10 @@ import java.util.Arrays;
 @Service
 public class UserService implements IUserService {
     @Autowired
-    private UserDao repository;
+    private UserDao userRepository;
+
+    @Autowired
+    private VerificationTokenDao verificationTokenRepository;
 
     @Transactional
     @Override
@@ -33,11 +37,19 @@ public class UserService implements IUserService {
         user.setPassword(accountDto.getPassword());
         user.setEmail(accountDto.getEmail());
 //        user.setRoles(Arrays.asList("ROLE_USER"));
-        repository.create(user);
+        userRepository.create(user);
         return user;
     }
+
+    @Override
+    public void saveVerificationToken(User user, String token) {
+        VerificationToken verificationToken = new VerificationToken(token, user);
+
+        verificationTokenRepository.create(verificationToken);
+    }
+
     private boolean emailExist(String email) {
-        User user = repository.getByEmail(email);
+        User user = userRepository.getByEmail(email);
         if (user != null) {
             return true;
         }

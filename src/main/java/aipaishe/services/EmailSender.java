@@ -13,7 +13,7 @@ import java.util.Properties;
  */
 @Component
 public class EmailSender {
-    public static void sendEmail(String toEmailAddress, long userId){
+    public static void sendEmail(String toEmailAddress, long userId, String confirmationUrl){
     final String fromEmail = "projectourwedding@gmail.com"; //requires valid gmail id
     final String password = "aipaishe2015"; // correct password for gmail id
 //    final String toEmail = "cslxxwilliam@gmail.com"; // can be any email id
@@ -35,7 +35,8 @@ public class EmailSender {
     };
     Session session = Session.getInstance(props, auth);
 
-        EmailUtil.sendEmail(session, toEmail,"AiPaiShe User Registration", "Congratulations! You have successfully registered in AiPaiShe with member ID "+userId +".");
+        EmailUtil.sendEmail(session, toEmail,"AiPaiShe User Registration", "Congratulations! You have successfully registered in AiPaiShe with member ID "+userId +
+                ".\\n Please click the link below to active your account: "+confirmationUrl);
     }
 
 }

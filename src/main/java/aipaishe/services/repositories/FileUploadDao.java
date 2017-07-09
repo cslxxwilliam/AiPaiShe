@@ -1,5 +1,6 @@
-package aipaishe.models;
+package aipaishe.services.repositories;
 
+import aipaishe.models.FileUpload;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

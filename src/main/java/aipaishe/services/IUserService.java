@@ -10,4 +10,6 @@ import aipaishe.models.UserDto;
 public interface IUserService {
     User registerNewUserAccount(UserDto accountDto)
             throws EmailExistsException;
+
+    void saveVerificationToken(User user, String token);
 }

@@ -2,20 +2,18 @@ package aipaishe.controllers;
 
 import aipaishe.models.OnRegistrationCompleteEvent;
 import aipaishe.models.User;
-import aipaishe.models.UserDao;
+import aipaishe.services.repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
-import javax.persistence.NoResultException;
-
+import javax.servlet.ServletRequestWrapper;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -36,7 +34,7 @@ public class UserRegistrationController {
      */
     @RequestMapping(value = "/user/registration", method = POST)
     @ResponseBody
-    public ResponseEntity signup(@RequestBody User user, WebRequest request) {
+    public ResponseEntity signup(@RequestBody User user, HttpServletRequest request) {
         try {
             System.out.println("User: " + user);
 
@@ -49,7 +47,7 @@ public class UserRegistrationController {
             }
 
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
-                    (user, request.getContextPath()));
+                    (user, getBaseUrl(request)));
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the user: " + ex.toString());
         }
@@ -77,5 +75,9 @@ public class UserRegistrationController {
         else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password");
         }
+    }
+
+    private String getBaseUrl(HttpServletRequest request) {
+        return String.format("%s://%s:%d/",request.getScheme(),  request.getServerName(), request.getServerPort());
     }
 }

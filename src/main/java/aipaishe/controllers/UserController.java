@@ -1,10 +1,9 @@
 package aipaishe.controllers;
 
 import aipaishe.models.User;
-import aipaishe.models.UserDao;
+import aipaishe.services.repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 

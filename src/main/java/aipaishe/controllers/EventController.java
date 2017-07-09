@@ -1,8 +1,7 @@
 package aipaishe.controllers;
 
 import aipaishe.models.Event;
-import aipaishe.models.EventDao;
-import aipaishe.models.User;
+import aipaishe.services.repositories.EventDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

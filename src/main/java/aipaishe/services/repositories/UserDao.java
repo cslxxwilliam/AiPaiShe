@@ -1,4 +1,4 @@
-package aipaishe.models;
+package aipaishe.services.repositories;
 
 import aipaishe.models.User;
 import org.springframework.stereotype.Repository;

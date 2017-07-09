@@ -1,5 +1,7 @@
-package aipaishe.models;
+package aipaishe.services.repositories;
 
+import aipaishe.models.Event;
+import aipaishe.models.userregistration.VerificationToken;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import java.util.List;
 /**
  * Created by hillmon on 7/5/2017.
  */
+
 /**
  * This class is used to access data for the User entity.
  * Repository annotation allows the component scanning support to find and
@@ -22,53 +25,53 @@ import java.util.List;
  */
 @Repository
 @Transactional
-public class EventDao {
+public class VerificationTokenDao {
 
     /**
-     * Save the event in the database.
+     * Save the verificationToken in the database.
      */
-    public void create(Event event) {
-        entityManager.persist(event);
+    public void create(VerificationToken verificationToken) {
+        entityManager.persist(verificationToken);
         return;
     }
 
     /**
-     * Delete the event from the database.
+     * Delete the verificationToken from the database.
      */
-    public void delete(Event event) {
-        if (entityManager.contains(event))
-            entityManager.remove(event);
+    public void delete(VerificationToken verificationToken) {
+        if (entityManager.contains(verificationToken))
+            entityManager.remove(verificationToken);
         else
-            entityManager.remove(entityManager.merge(event));
+            entityManager.remove(entityManager.merge(verificationToken));
         return;
     }
 
     public List getAll() {
-        return entityManager.createQuery("from Event").getResultList();
+        return entityManager.createQuery("from VerificationToken").getResultList();
     }
 
     /**
      * Return the event having the passed id.
      */
-    public Event getById(long id) {
-        return entityManager.find(Event.class, id);
+    public VerificationToken getById(long id) {
+        return entityManager.find(VerificationToken.class, id);
     }
 
     /**
-     * Return the event having the passed event name.
+     * Return the event having the passed event token.
      */
-    public Event getByName (String name) {
-        return (Event) entityManager.createQuery(
-                "from Event where eventName = :name")
-                .setParameter("name", name)
+    public VerificationToken getByToken (String token) {
+        return (VerificationToken) entityManager.createQuery(
+                "from VerificationToken where token = :token")
+                .setParameter("token", token)
                 .getSingleResult();
     }
 
     /**
-     * Update the passed event in the database.
+     * Update the passed verificationToken in the database.
      */
-    public void update(Event event) {
-        entityManager.merge(event);
+    public void update(VerificationToken verificationToken) {
+        entityManager.merge(verificationToken);
         return;
     }
 
