@@ -3,10 +3,6 @@
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Login to AiPaiShe</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancel()">
-                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-                </md-button>
             </div>
         </md-toolbar>
 
@@ -15,12 +11,12 @@
                 <form name="loginForm">
                     <md-input-container class="md-block">
                         <label>Email</label>
-                        <input ng-model="loginEmail">
+                        <input ng-model="vm.loginEmail">
                     </md-input-container>
 
                     <md-input-container class="md-block">
                         <label>Password</label>
-                        <input ng-model="loginPassword" type="password">
+                        <input ng-model="vm.loginPassword" type="password">
                     </md-input-container>
                 </form>
             </div>
