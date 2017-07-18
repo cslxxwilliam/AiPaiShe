@@ -14,6 +14,9 @@ import java.util.Date;
 public class VerificationToken {
     private static final int EXPIRATION = 60 * 24;
 
+    public VerificationToken() {
+    }
+
     public VerificationToken(String token, User user) {
         this.token = token;
         this.user = user;

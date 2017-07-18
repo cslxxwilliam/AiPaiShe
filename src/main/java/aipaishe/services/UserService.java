@@ -36,6 +36,7 @@ public class UserService implements IUserService {
         user.setLastName(accountDto.getLastName());
         user.setPassword(accountDto.getPassword());
         user.setEmail(accountDto.getEmail());
+        user.setActivated(false);
 //        user.setRoles(Arrays.asList("ROLE_USER"));
         userRepository.create(user);
         return user;
@@ -46,6 +47,16 @@ public class UserService implements IUserService {
         VerificationToken verificationToken = new VerificationToken(token, user);
 
         verificationTokenRepository.create(verificationToken);
+    }
+
+    @Override
+    public VerificationToken getVerificationToken(String token) {
+        return verificationTokenRepository.getByToken(token);
+    }
+
+    @Override
+    public void saveRegisteredUser(User user) {
+        userRepository.update(user);
     }
 
     private boolean emailExist(String email) {

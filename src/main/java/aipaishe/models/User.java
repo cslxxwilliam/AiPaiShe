@@ -1,5 +1,8 @@
 package aipaishe.models;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -24,6 +27,12 @@ public class User {
     @NotNull
     private String password;
 
+    @NotNull
+//    @Type(type = "boolean")
+//    @Column(columnDefinition = "TINYINT")
+//    @Type(type = "yes_no")
+    private boolean activated;
+
     // Public methods
 
     public User() {
@@ -39,6 +48,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.activated = false;
     }
 
     public long getId() {
@@ -89,6 +99,15 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
+                ", activated=" + activated +
                 '}';
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    public boolean isActivated() {
+        return activated;
     }
 }
