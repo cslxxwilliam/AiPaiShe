@@ -9,9 +9,9 @@ var headerComponent = {
 
 aipaisheApp.component('aipaisheHeader', headerComponent);
 
-HeaderComponentController.$inject = ['$scope', '$location', '$mdDialog', '$http'];
+HeaderComponentController.$inject = ['$scope', '$rootScope', '$location', '$mdDialog', '$http', 'AUTH_EVENTS', 'Session'];
 
-function HeaderComponentController($scope, $location, $mdDialog, $http) {
+function HeaderComponentController($scope, $rootScope, $location, $mdDialog, $http, AUTH_EVENTS, Session) {
     var vm = this;
 
     vm.username = "Guest";
@@ -56,11 +56,21 @@ function HeaderComponentController($scope, $location, $mdDialog, $http) {
                     vm.username = respData.username;
                     vm.isLogin = true;
                     vm.showErrorMessage('Login successful!');
+
+                    console.log(response);
+
+                    Session.create(response.id, respData.userid, 'testuser');
+
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 }, function(error) {
                     console.log(error);
                     console.log('error when hitting server: ' + error.statusText);
                     vm.isLogin = false;
                     vm.showErrorMessage('Invalid email or password!');
+
+                    Session.destroy();
+
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
                 });
 
             }, function() {
@@ -73,6 +83,7 @@ function HeaderComponentController($scope, $location, $mdDialog, $http) {
         vm.username = 'Guest';
         vm.isLogin = false;
         vm.showErrorMessage('You have successfully logged out!');
+        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
     }
 
     DialogController = function($scope, $mdDialog) {
