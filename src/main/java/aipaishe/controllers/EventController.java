@@ -47,6 +47,7 @@ public class EventController {
         return event;
     }
 
+    //testing for Teamcity agent with Git
     @RequestMapping(value="/get-all-event-json")
     @ResponseBody
     public List<Event> getAllEvent() {
