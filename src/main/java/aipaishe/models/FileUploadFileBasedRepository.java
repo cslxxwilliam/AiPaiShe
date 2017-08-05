@@ -34,6 +34,8 @@ public class FileUploadFileBasedRepository implements FileUploadRepository{
         });
 
         assert files != null;
+
+        // TODO: william please help to update this part to return the correct file path after folder refactor
         return Arrays.stream(files).map((f) -> new PhotoLocation(eventId, getFullPathForExternal(folder, f.getName()))).collect(toList());
     }
 
