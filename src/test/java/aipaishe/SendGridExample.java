@@ -15,16 +15,14 @@ public class SendGridExample {
         Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
         Mail mail = new Mail(from, subject, to, content);
 
-        // SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
-
-        SendGrid sendgrid = new SendGrid("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");
+        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
 
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
-            Response response = sendgrid.api(request);
+            Response response = sg.api(request);
             System.out.println(response.getStatusCode());
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
