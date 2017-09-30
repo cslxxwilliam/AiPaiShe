@@ -63,6 +63,15 @@ public class EmailSender {
 
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
 
+        if (System.getenv("SENDGRID_API_KEY") != null)
+        {
+            System.out.println("API Key found!!!");
+        }
+        else
+        {
+            System.out.println("API Key not found!!!");
+        }
+
         Request request = new Request();
         try {
             request.setMethod(Method.POST);
