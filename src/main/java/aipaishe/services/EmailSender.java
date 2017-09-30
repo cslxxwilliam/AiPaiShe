@@ -63,6 +63,9 @@ public class EmailSender {
 
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
 
+        System.out.println("===========All environment variables==============");
+        System.out.println(System.getenv());
+
         if (System.getenv("SENDGRID_API_KEY") != null)
         {
             System.out.println("API Key found!!!");
