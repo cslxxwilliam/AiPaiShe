@@ -16,41 +16,8 @@ import java.util.Properties;
 @Component
 public class EmailSender {
     public static void sendEmail (String toEmailAddress, long userId, String confirmationUrl) throws IOException {
-    // final String fromEmail = "projectourwedding@gmail.com"; //requires valid gmail id
-    // final String password = "aipaishe2015"; // correct password for gmail id
+
     final String toEmail = toEmailAddress; // can be any email id
-
-        /*
-        System.out.println("TLSEmail Start");
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-        props.put("mail.smtp.port", "587"); //TLS Port
-        props.put("mail.smtp.auth", "true"); //enable authentication
-        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
-
-        System.out.println("SSLEmail Start");
-        Properties props = new Properties();
-        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
-        props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
-        props.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class
-        props.put("mail.smtp.auth", "true"); //Enabling SMTP Authentication
-        props.put("mail.smtp.port", "465"); //SMTP Port
-
-        //create Authenticator object to pass in Session.getInstance argument
-        Authenticator auth = new Authenticator() {
-            //override the getPasswordAuthentication method
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, password);
-            }
-        };
-
-        Session session = Session.getDefaultInstance(props, auth);
-        System.out.println("Session created");
-
-        EmailUtil.sendEmail(session, toEmail,"AiPaiShe User Registration", "Congratulations! You have successfully registered in AiPaiShe with member ID "+userId +
-                ".\n Please click the link below to active your account: "+confirmationUrl);
-        */
 
         // Send email with SendGrid
 
@@ -68,11 +35,11 @@ public class EmailSender {
 
         if (System.getenv("SENDGRID_API_KEY") != null)
         {
-            System.out.println("API Key found!!!");
+            System.out.println("[Debug] API Key found!!!");
         }
         else
         {
-            System.out.println("API Key not found!!!");
+            System.out.println("[Debug] API Key not found!!!");
         }
 
         Request request = new Request();
