@@ -1,7 +1,9 @@
 package aipaishe.controllers;
 
 import aipaishe.models.User;
+import aipaishe.models.userregistration.VerificationToken;
 import aipaishe.services.repositories.UserDao;
+import aipaishe.services.repositories.VerificationTokenDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +29,36 @@ public class UserController {
             return "Error deleting the user: " + ex.toString();
         }
         return "User succesfully deleted!";
+    }
+
+    /**
+     * Delete all the users in the database (for testing purpose ONLY).
+     */
+    @RequestMapping(value="/deletealluser")
+    @ResponseBody
+    public String deleteAllUser() {
+        try {
+            // delete all user verification tokens because of the FK dependency
+
+            List<VerificationToken> tokenList = verificationTokenDao.getAll();
+
+            for (VerificationToken token : tokenList)
+            {
+                verificationTokenDao.delete(token);
+            }
+
+            // delete all users after removing all tokens
+            List<User> userList = userDao.getAll();
+
+            for (User user : userList)
+            {
+                userDao.delete(user);
+            }
+        }
+        catch (Exception ex) {
+            return "Error resetting the user: " + ex.toString();
+        }
+        return "User data successfully reset!";
     }
 
     /**
@@ -102,5 +134,10 @@ public class UserController {
     // Wire the UserDao used inside this controller.
     @Autowired
     private UserDao userDao;
+
+    // Wire the VerificationTokenDao used inside this controller.
+    @Autowired
+    private VerificationTokenDao verificationTokenDao;
+
 
 }

@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.util.UUID;
 
 /**
@@ -26,10 +27,15 @@ public class UserRegistrationListener implements ApplicationListener<OnRegistrat
 
         @Override
         public void onApplicationEvent(OnRegistrationCompleteEvent event) {
-            this.confirmRegistration(event);
+            try {
+                this.confirmRegistration(event);
+            }
+            catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
 
-    private void confirmRegistration(OnRegistrationCompleteEvent event) {
+    private void confirmRegistration(OnRegistrationCompleteEvent event) throws IOException {
         User user = event.getUser();
         String token = UUID.randomUUID().toString();
         service.saveVerificationToken(user, token);
