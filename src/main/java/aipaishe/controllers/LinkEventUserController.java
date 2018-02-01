@@ -13,13 +13,13 @@ import java.util.List;
 /**
  * Created by hillmon on 14/7/2017.
  */
+@CrossOrigin
 @RestController
 public class LinkEventUserController {
 
     /**
      * Create a new link
      */
-    @CrossOrigin
     @RequestMapping(value="/createlink")
     @ResponseBody
     public LinkEventUser createEventUserLink(long eventId, long userId) {

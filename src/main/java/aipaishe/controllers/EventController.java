@@ -14,13 +14,13 @@ import java.util.List;
 /**
  * Created by hillmon on 7/5/2017.
  */
+@CrossOrigin
 @RestController
 public class EventController {
 
     /**
      * Create a new event
      */
-    @CrossOrigin
     @RequestMapping(value="/createevent")
     @ResponseBody
     public Event createEvent(@RequestParam(value="owner")long ownerId, @RequestParam(value="date")String dateStr, @RequestParam(value="name")String eventName, @RequestParam(value="venue")String eventVenue) throws ParseException {
@@ -34,7 +34,6 @@ public class EventController {
     /**
      * Retrieve the id for the event
      */
-    @CrossOrigin(origins = "http://localhost:8080")
     @RequestMapping(value="/get-event-by-id-json")
     @ResponseBody
     public Event getEventByIdJson(long id) {
@@ -49,7 +48,6 @@ public class EventController {
     }
 
     //testing for Teamcity agent with Git
-    @CrossOrigin
     @RequestMapping(value="/get-all-event-json")
     @ResponseBody
     public List<Event> getAllEvent() {
@@ -63,7 +61,6 @@ public class EventController {
         return eventList;
     }
 
-    @CrossOrigin
     @RequestMapping(value="/get-event-by-name-json")
     @ResponseBody
     public Event getByNameJson(String name) {
@@ -80,7 +77,6 @@ public class EventController {
     /**
      * Update the email and the name for the user indentified by the passed id.
      */
-    @CrossOrigin
     @RequestMapping(value="/updateevent")
     @ResponseBody
     public String updateDesc(long id, String desc) {

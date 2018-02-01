@@ -22,6 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 /**
  * Created by williamxuxianglin on 22/6/17.
  */
+@CrossOrigin
 @RestController
 public class UserRegistrationController {
     @Autowired
