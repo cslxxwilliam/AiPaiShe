@@ -22,7 +22,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 /**
  * Created by williamxuxianglin on 22/6/17.
  */
-@CrossOrigin
 @RestController
 public class UserRegistrationController {
     @Autowired
@@ -39,6 +38,7 @@ public class UserRegistrationController {
      * Create a new user with an auto-generated id and email and name as passed
      * values.
      */
+    @CrossOrigin
     @RequestMapping(value = "/user/registration", method = POST)
     @ResponseBody
     public ResponseEntity signup(@RequestBody User user, HttpServletRequest request) {
@@ -67,17 +67,28 @@ public class UserRegistrationController {
      * Create a new user with an auto-generated id and email and name as passed
      * values.
      */
+    @CrossOrigin
     @RequestMapping(value = "/user/login")
     @ResponseBody
     public ResponseEntity userLogin(String email, String password) {
         User rtnUser = userDao.verifyUserLogin(email,password);
         if (rtnUser != null) {
             HashMap<String, String> responseBody = new HashMap<>();
-            responseBody.put("message", "Sign up successful");
-            responseBody.put("username", rtnUser.getLastName() + " " + rtnUser.getFirstName());
-            responseBody.put("userid", String.valueOf(rtnUser.getId()));
-            responseBody.put("useremail",rtnUser.getEmail());
-            return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+            if (rtnUser.isActivated()) {
+                responseBody.put("message", "Sign up successful");
+                responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
+                responseBody.put("id", String.valueOf(rtnUser.getId()));
+                responseBody.put("email", rtnUser.getEmail());
+                return ResponseEntity.status(HttpStatus.OK).body(responseBody);
+            }
+            else
+            {
+                responseBody.put("message", "User is not yet activated!");
+                responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
+                responseBody.put("id", String.valueOf(rtnUser.getId()));
+                responseBody.put("email", rtnUser.getEmail());
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
+            }
         }
         else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password");
@@ -88,6 +99,7 @@ public class UserRegistrationController {
         return String.format("%s://%s:%d/",request.getScheme(),  request.getServerName(), request.getServerPort());
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/registrationConfirm", method = RequestMethod.GET)
     public ResponseEntity confirmRegistration
             (WebRequest request, @RequestParam("token") String token) {
