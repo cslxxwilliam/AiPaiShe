@@ -51,11 +51,30 @@ public class UserDao {
     /**
      * Return the user having the passed email.
      */
+    /*
+    edited by Hillmon to fix the bug
+     */
+
     public User getByEmail(String email) {
+        User foundUser = null;
+        try {
+            foundUser = (User) entityManager.createQuery(
+                    "from User where email = :email")
+                    .setParameter("email", email)
+                    .getSingleResult();
+        }
+        catch (Exception e) {
+            System.out.println("No user is found!!!");
+        }
+        finally {
+            return foundUser;
+        }
+        /*
         return (User) entityManager.createQuery(
                 "from User where email = :email")
                 .setParameter("email", email)
                 .getSingleResult();
+        */
     }
 
     /**
@@ -77,6 +96,11 @@ public class UserDao {
     /**
      * Verify the passed user email and password in the database.
      */
+
+    /*
+    edited by Hillmon to fix the bug of wrong username or password
+     */
+
     public User verifyUserLogin(String email, String password) {
         User rtnUser = this.getByEmail(email);
         if (rtnUser != null){

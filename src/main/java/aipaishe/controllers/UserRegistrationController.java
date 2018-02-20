@@ -72,8 +72,8 @@ public class UserRegistrationController {
     @ResponseBody
     public ResponseEntity userLogin(String email, String password) {
         User rtnUser = userDao.verifyUserLogin(email,password);
+        HashMap<String, String> responseBody = new HashMap<>();
         if (rtnUser != null) {
-            HashMap<String, String> responseBody = new HashMap<>();
             if (rtnUser.isActivated()) {
                 responseBody.put("message", "Sign up successful");
                 responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
@@ -91,7 +91,8 @@ public class UserRegistrationController {
             }
         }
         else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid username or password");
+            responseBody.put("message", "Invalid username or password");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
         }
     }
 
