@@ -36,6 +36,8 @@ dependencies {
     testCompile("junit:junit")
 
     compile 'com.sendgrid:sendgrid-java:4.1.0'
+
+    compile 'com.google.cloud:google-cloud-storage:1.14.0'
 }
 
 task wrapper(type: Wrapper) {
