@@ -29,10 +29,16 @@ public class Event {
     @NotNull
     private String eventVenue;
 
+    @NotNull
+    private int eventQuota;
 
-    public String getEventDesc() {
-        return eventDesc;
-    }
+    private double eventFeeAmt;
+
+    @NotNull
+    private boolean isPaidEvent;
+
+    @NotNull
+    private String eventType;
 
     private String eventDesc;
 
@@ -45,11 +51,15 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public Event(long owner, Date date, String name, String venue) {
+    public Event(long owner, Date date, String name, String venue, String type, int quota) {
         this.ownerId = owner;
         this.eventDate = date;
         this.eventName = name;
         this.eventVenue = venue;
+        this.eventType = type;
+        this.eventQuota = quota;
+        // TODO: replace this dummy setting when paid events can be supported
+        this.isPaidEvent = false;
     }
 
     public Event(long ownerId, String eventName, Date eventDate, String eventVenue, String eventDesc) {
@@ -100,6 +110,42 @@ public class Event {
 
     public void setEventVenue(String eventVenue) {
         this.eventVenue = eventVenue;
+    }
+
+    public int getEventQuota() {
+        return eventQuota;
+    }
+
+    public void setEventQuota(int eventQuota) {
+        this.eventQuota = eventQuota;
+    }
+
+    public double getEventFeeAmt() {
+        return eventFeeAmt;
+    }
+
+    public void setEventFeeAmt(double eventFeeAmt) {
+        this.eventFeeAmt = eventFeeAmt;
+    }
+
+    public boolean isPaidEvent() {
+        return isPaidEvent;
+    }
+
+    public void setPaidEvent(boolean paidEvent) {
+        isPaidEvent = paidEvent;
+    }
+
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
+    }
+
+    public String getEventDesc() {
+        return eventDesc;
     }
 
     public void setEventDesc(String eventDesc) {

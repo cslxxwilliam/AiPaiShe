@@ -53,13 +53,13 @@ function HeaderComponentController($scope, $rootScope, $location, $mdDialog, $ht
                 // verify the user email and password
                 $http.get('user/login?email=' + vm.loginEmail + '&password=' + vm.loginPassword).then(function(response) {
                     var respData = response.data;
-                    vm.username = respData.username;
+                    vm.username = respData.name;
                     vm.isLogin = true;
                     vm.showErrorMessage('Login successful!');
 
                     console.log(response);
 
-                    Session.create(response.id, respData.userid, 'testuser');
+                    Session.create(response.id, respData.id, 'testuser');
 
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                 }, function(error) {
