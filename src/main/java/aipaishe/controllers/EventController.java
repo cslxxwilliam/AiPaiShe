@@ -29,7 +29,7 @@ public class EventController {
                              @RequestParam(value = "venue") String eventVenue,
                              @RequestParam(value = "type") String eventType,
                              @RequestParam(value = "quota") int eventQuota) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         Date eventDate = formatter.parse(dateStr);
         Event event = new Event(ownerId, eventDate, eventName, eventVenue, eventType, eventQuota);
         eventDao.create(event);
