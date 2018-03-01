@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Created by hillmon on 7/5/2017.
+ * Updated by hillmon on 1/3/2018.
  */
 @CrossOrigin
 @RestController
@@ -21,7 +20,7 @@ public class EventController {
     /**
      * Create a new event
      */
-    @RequestMapping(value = "/createevent")
+    @RequestMapping(value = "/event/create")
     @ResponseBody
     public Event createEvent(@RequestParam(value = "owner") long ownerId,
                              @RequestParam(value = "date") String dateStr,
@@ -39,7 +38,7 @@ public class EventController {
     /**
      * Retrieve the id for the event
      */
-    @RequestMapping(value = "/get-event-by-id-json")
+    @RequestMapping(value = "/event/get")
     @ResponseBody
     public Event getEventByIdJson(long id) {
         Event event;
@@ -52,10 +51,10 @@ public class EventController {
     }
 
     //testing for Teamcity agent with Git
-    @RequestMapping(value = "/get-all-event-json")
+    @RequestMapping(value = "/event/get-all")
     @ResponseBody
     public List<Event> getAllEvent() {
-        List eventList = new ArrayList();
+        List eventList;
         try {
             eventList = eventDao.getAll();
         } catch (Exception ex) {
@@ -64,6 +63,7 @@ public class EventController {
         return eventList;
     }
 
+    /*
     @RequestMapping(value = "/get-event-by-name-json")
     @ResponseBody
     public Event getByNameJson(String name) {
@@ -75,21 +75,102 @@ public class EventController {
         }
         return event;
     }
+    */
 
     /**
-     * Update the email and the name for the user indentified by the passed id.
+     * Update the event identified by the passed id.
      */
-    @RequestMapping(value = "/updateevent")
+    @RequestMapping(value = "/event/update/desc")
     @ResponseBody
-    public String updateDesc(long id, String desc) {
+    public String updateEventDesc(long id, String desc) {
         try {
             Event event = eventDao.getById(id);
             event.setEventDesc(desc);
             eventDao.update(event);
         } catch (Exception ex) {
-            return "Error updating the event: " + ex.toString();
+            return "Error updating the event description: " + ex.toString();
         }
-        return "Event successfully updated!";
+        return "Event description successfully updated!";
+    }
+
+    /**
+     * Update the event identified by the passed id.
+     */
+    @RequestMapping(value = "/event/update/name")
+    @ResponseBody
+    public String updateEventName(long id, String name) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventName(name);
+            eventDao.update(event);
+        } catch (Exception ex) {
+            return "Error updating the event description: " + ex.toString();
+        }
+        return "Event Name successfully updated!";
+    }
+
+    /**
+     * Update the event identified by the passed id.
+     */
+    @RequestMapping(value = "/event/update/date")
+    @ResponseBody
+    public String updateEventDAte(long id, Date date) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventDate(date);
+            eventDao.update(event);
+        } catch (Exception ex) {
+            return "Error updating the event description: " + ex.toString();
+        }
+        return "Event Date successfully updated!";
+    }
+
+    /**
+     * Update the event identified by the passed id.
+     */
+    @RequestMapping(value = "/event/update/venue")
+    @ResponseBody
+    public String updateEventVenue(long id, String venue) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventVenue(venue);
+            eventDao.update(event);
+        } catch (Exception ex) {
+            return "Error updating the event description: " + ex.toString();
+        }
+        return "Event Venue successfully updated!";
+    }
+
+    /**
+     * Update the event identified by the passed id.
+     */
+    @RequestMapping(value = "/event/update/type")
+    @ResponseBody
+    public String updateEventType(long id, String type) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventType(type);
+            eventDao.update(event);
+        } catch (Exception ex) {
+            return "Error updating the event description: " + ex.toString();
+        }
+        return "Event Type successfully updated!";
+    }
+
+    /**
+     * Update the event identified by the passed id.
+     */
+    @RequestMapping(value = "/event/update/quota")
+    @ResponseBody
+    public String updateEventQuota(long id, int quota) {
+        try {
+            Event event = eventDao.getById(id);
+            event.setEventQuota(quota);
+            eventDao.update(event);
+        } catch (Exception ex) {
+            return "Error updating the event description: " + ex.toString();
+        }
+        return "Event Quota successfully updated!";
     }
 
     // Private fields

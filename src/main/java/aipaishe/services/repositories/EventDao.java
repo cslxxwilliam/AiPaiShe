@@ -30,7 +30,6 @@ public class EventDao {
      */
     public void create(Event event) {
         entityManager.persist(event);
-        return;
     }
 
     /**
@@ -41,7 +40,6 @@ public class EventDao {
             entityManager.remove(event);
         else
             entityManager.remove(entityManager.merge(event));
-        return;
     }
 
     public List getAll() {
@@ -70,7 +68,6 @@ public class EventDao {
      */
     public void update(Event event) {
         entityManager.merge(event);
-        return;
     }
 
     // Private fields
