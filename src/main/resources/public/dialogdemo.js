@@ -45,7 +45,7 @@ angular.module('aipaisheApp')
             .then(function(answer) {
                 $scope.status = 'Confirming';
                 // var url = "createevent?owner=1&" + "name=" + $scope.eventName + "&date=" + new Date($scope.eventDate).toISOString() + "&venue=" + $scope.eventVenue;
-                var url = "createevent?owner=" + Session.userId + "&name=" + $scope.eventName + "&date=" + new Date($scope.eventDate).toISOString() + "&venue=" + $scope.eventVenue + "&type=Others&quota=99";
+                var url = "event/create?owner=" + Session.userId + "&name=" + $scope.eventName + "&date=" + new Date($scope.eventDate).toISOString() + "&venue=" + $scope.eventVenue + "&type=Others&quota=99";
                 $http.get(url).then(function(response) {
                     console.log("success creating event! Event ID is " + response.data.eventId);
                     $location.path('/event/' + response.data.eventId);

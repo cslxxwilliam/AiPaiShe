@@ -26,7 +26,7 @@ function EventDetailController($http, $routeParams, $scope) {
 
     console.log(Galleria.get(0));
 
-    $http.get('get-event-by-id-json?id=' + $routeParams.eventId).then(function(response) {
+    $http.get('event/get?id=' + $routeParams.eventId).then(function(response) {
         vm.eventData = response.data;
         // convert the returned date from millisecond to date type
         vm.eventDate = new Date(vm.eventData.eventDate);

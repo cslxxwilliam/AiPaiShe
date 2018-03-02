@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -20,7 +19,7 @@ public class UserController {
     /**
      * Delete the user with the passed id.
      */
-    @RequestMapping(value="/deleteuser")
+    @RequestMapping(value = "/user/delete")
     @ResponseBody
     public String delete(long id) {
         try {
@@ -30,13 +29,13 @@ public class UserController {
         catch (Exception ex) {
             return "Error deleting the user: " + ex.toString();
         }
-        return "User succesfully deleted!";
+        return "User successfully deleted!";
     }
 
     /**
      * Delete all the users in the database (for testing purpose ONLY).
      */
-    @RequestMapping(value="/deletealluser")
+    @RequestMapping(value = "/user/delete-all")
     @ResponseBody
     public String deleteAllUser() {
         try {
@@ -64,33 +63,14 @@ public class UserController {
     }
 
     /**
-     * Retrieve the id for the user with the passed email address.
+     * Retrieve the user with the passed email address.
      */
-    @RequestMapping(value="/get-user-by-email")
-    @ResponseBody
-    public String getByEmail(String email) {
-        String userId;
-        try {
-            User user = userDao.getByEmail(email);
-            userId = String.valueOf(    user.getId());
-        }
-        catch (Exception ex) {
-            return "User not found: " + ex.toString();
-        }
-        return "The user id is: " + userId;
-    }
-
-    /**
-     * Retrieve the id for the user with the passed email address.
-     */
-    @RequestMapping(value="/get-user-by-email-json")
+    @RequestMapping(value = "/user/get-by-email")
     @ResponseBody
     public User getByEmailJson(String email) {
         User user;
-        String userId;
         try {
             user = userDao.getByEmail(email);
-            userId = String.valueOf(    user.getId());
         }
         catch (Exception ex) {
             return null;
@@ -98,10 +78,25 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value="/get-all-user-json")
+    /**
+     * Retrieve the user with the passed email address.
+     */
+    @RequestMapping(value = "/user/get")
+    @ResponseBody
+    public User getUserById(long id) {
+        User user;
+        try {
+            user = userDao.getById(id);
+        } catch (Exception ex) {
+            return null;
+        }
+        return user;
+    }
+
+    @RequestMapping(value = "/user/get-all")
     @ResponseBody
     public List<User> getAllUser() {
-        List userList = new ArrayList();
+        List userList;
         try {
             userList = userDao.getAll();
         }
@@ -114,9 +109,9 @@ public class UserController {
     /**
      * Update the email and the name for the user indentified by the passed id.
      */
-    @RequestMapping(value="/updateuser")
+    @RequestMapping(value = "/user/update")
     @ResponseBody
-    public String updateName(long id, String email, String firstName, String lastName) {
+    public String updateUser(long id, String email, String firstName, String lastName) {
         try {
             User user = userDao.getById(id);
             user.setEmail(email);
