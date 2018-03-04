@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Updated by hillmon on 1/3/2018.
+ * Updated by hillmon on 4/3/2018.
  */
 @CrossOrigin
 @RestController
@@ -54,7 +54,7 @@ public class EventController {
     @RequestMapping(value = "/event/get-all")
     @ResponseBody
     public List<Event> getAllEvent() {
-        List eventList;
+        List<Event> eventList;
         try {
             eventList = eventDao.getAll();
         } catch (Exception ex) {
@@ -171,6 +171,41 @@ public class EventController {
             return "Error updating the event description: " + ex.toString();
         }
         return "Event Quota successfully updated!";
+    }
+
+    /**
+     * Delete the event with the passed id.
+     */
+    @RequestMapping(value = "/event/delete")
+    @ResponseBody
+    public String delete(long id) {
+        try {
+            Event event = new Event(id);
+            eventDao.delete(event);
+        } catch (Exception ex) {
+            return "Error deleting the event: " + ex.toString();
+        }
+        return "Event successfully deleted!";
+    }
+
+    /**
+     * Delete all the events in the database (for testing purpose ONLY).
+     */
+    @RequestMapping(value = "/event/delete-all")
+    @ResponseBody
+    public String deleteAllEvent() {
+        try {
+
+            // delete all users after removing all tokens
+            List<Event> eventList = eventDao.getAll();
+
+            for (Event event : eventList) {
+                eventDao.delete(event);
+            }
+        } catch (Exception ex) {
+            return "Error resetting the event: " + ex.toString();
+        }
+        return "Event data successfully reset!";
     }
 
     // Private fields
