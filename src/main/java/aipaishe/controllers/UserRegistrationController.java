@@ -72,19 +72,17 @@ public class UserRegistrationController {
         User rtnUser = userDao.verifyUserLogin(email,password);
         HashMap<String, String> responseBody = new HashMap<>();
         if (rtnUser != null) {
+            responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
+            responseBody.put("id", String.valueOf(rtnUser.getId()));
+            responseBody.put("email", rtnUser.getEmail());
+
             if (rtnUser.isActivated()) {
-                responseBody.put("message", "Sign up successful");
-                responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
-                responseBody.put("id", String.valueOf(rtnUser.getId()));
-                responseBody.put("email", rtnUser.getEmail());
+                responseBody.put("message", "Log in successfully");
                 return ResponseEntity.status(HttpStatus.OK).body(responseBody);
             }
             else
             {
                 responseBody.put("message", "User is not yet activated!");
-                responseBody.put("name", rtnUser.getLastName() + " " + rtnUser.getFirstName());
-                responseBody.put("id", String.valueOf(rtnUser.getId()));
-                responseBody.put("email", rtnUser.getEmail());
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseBody);
             }
         }
