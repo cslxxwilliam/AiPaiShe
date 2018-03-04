@@ -45,13 +45,11 @@ public class UserRegistrationController {
         try {
             System.out.println("User: " + user);
 
-            try {
-                if(userDao.getByEmail(user.getEmail())!=null){
+            if(userDao.getByEmail(user.getEmail())!=null){
                     throw new Exception("Email already exists");
-                }
-            } catch (EmptyResultDataAccessException e) {
-                userDao.create(user);
             }
+
+            userDao.create(user);
 
             eventPublisher.publishEvent(new OnRegistrationCompleteEvent
                     (user, getBaseUrl(request)));
@@ -59,7 +57,7 @@ public class UserRegistrationController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error creating the user: " + ex.toString());
         }
         HashMap<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "Sign up successful");
+        responseBody.put("message", "Sign up successfully");
         return ResponseEntity.status(HttpStatus.OK).body(responseBody);
     }
 
