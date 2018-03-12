@@ -20,7 +20,6 @@ public class FileUploadDao {
      */
     public void create(FileUpload fileupload) {
         entityManager.persist(fileupload);
-        return;
     }
 
     /**
@@ -31,7 +30,6 @@ public class FileUploadDao {
             entityManager.remove(fileupload);
         else
             entityManager.remove(entityManager.merge(fileupload));
-        return;
     }
 
     public List getAll() {
@@ -46,11 +44,50 @@ public class FileUploadDao {
     }
 
     /**
+     * Return the event having the passed id.
+     */
+    public List<FileUpload> getByFileName(String fileName) {
+
+        return (List<FileUpload>) entityManager.createQuery(
+                "from FileUpload where fileName = :fileName")
+                .setParameter("fileName", fileName)
+                .getResultList();
+    }
+
+    /**
+     * Return the event having the passed id.
+     */
+    public List<FileUpload> getByEventId(long id) {
+
+        return (List<FileUpload>) entityManager.createQuery(
+                "from FileUpload where eventId = :id")
+                .setParameter("id", id)
+                .getResultList();
+    }
+
+    /**
+     * Return the event having the passed id and file type.
+     */
+    public List<FileUpload> getByEventIdFileType(long id, String type) {
+        if (type == "") {
+            return (List<FileUpload>) entityManager.createQuery(
+                    "from FileUpload where eventId = :id")
+                    .setParameter("id", id)
+                    .getResultList();
+        } else {
+            return (List<FileUpload>) entityManager.createQuery(
+                    "from FileUpload where eventId = :id and fileType = :type")
+                    .setParameter("id", id)
+                    .setParameter("type", type)
+                    .getResultList();
+        }
+    }
+
+    /**
      * Update the passed event in the database.
      */
     public void update(FileUpload fileupload) {
         entityManager.merge(fileupload);
-        return;
     }
 
     // Private fields
