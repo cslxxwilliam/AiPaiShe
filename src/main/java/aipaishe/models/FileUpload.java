@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by hillmon on 7/6/2017.
+ * Edited by hillmon on 9/3/2018.
  */
 @Entity
 @Table(name = "fileupload")
@@ -14,12 +14,7 @@ public class FileUpload {
         // Default Constructor
     }
 
-    public FileUpload(long eventId, String fileName, String mimeType, String srcPath) {
-        this.eventId = eventId;
-        this.fileName = fileName;
-        this.mimeType = mimeType;
-        this.srcPath = srcPath;
-    }
+    private String fileType;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +31,14 @@ public class FileUpload {
 
     @NotNull
     private String srcPath;
+
+    public FileUpload(long eventId, String fileName, String mimeType, String srcPath, String fileType) {
+        this.eventId = eventId;
+        this.fileName = fileName;
+        this.mimeType = mimeType;
+        this.srcPath = srcPath;
+        this.fileType = fileType;
+    }
 
     public long getFileId() {
         return fileId;
@@ -75,5 +78,13 @@ public class FileUpload {
 
     public void setSrcPath(String srcPath) {
         this.srcPath = srcPath;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
     }
 }
