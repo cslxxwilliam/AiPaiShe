@@ -1,12 +1,16 @@
 package aipaishe.controllers;
 
-import aipaishe.models.Event;
 import aipaishe.models.LinkEventUser;
 import aipaishe.services.repositories.LinkEventUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,69 +22,95 @@ import java.util.List;
 public class LinkEventUserController {
 
     /**
-     * Create a new link
+     * Create a new link between the passed event ID and user ID
      */
-    @RequestMapping(value="/createlink")
+    @RequestMapping(value = "/eulink/create")
     @ResponseBody
-    public LinkEventUser createEventUserLink(long eventId, long userId) {
+    public ResponseEntity createEventUserLink(long eventId, long userId) {
         LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
         linkEventUserDao.create(linkEventUser);
-        return linkEventUser;
+        return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
     }
 
     /**
-     * Delete the user with the passed id.
+     * Delete an existing link between the passed event ID and user ID
      */
-    @RequestMapping(value="/deletelink")
+    @RequestMapping(value = "/eulink/delete")
     @ResponseBody
-    public String deleteEventUserLink(long eventId, long userId) {
+    public ResponseEntity deleteEventUserLink(long eventId, long userId) {
         try {
-            LinkEventUser link = linkEventUserDao.getByEventUser(eventId,userId);
+            LinkEventUser link = linkEventUserDao.getByEventUser(eventId, userId);
             linkEventUserDao.delete(link);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("Error deleting the link: " + ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception ex) {
-            return "Error deleting the link: " + ex.toString();
-        }
-        return "Link succesfully deleted!";
+        return new ResponseEntity<>("Link successfully deleted!", HttpStatus.OK);
     }
 
-    @RequestMapping(value="/get-all-event-user-link")
+    /**
+     * Check if a link exists between the passed event ID and user ID
+     */
+    @RequestMapping(value = "/eulink/check")
     @ResponseBody
-    public List<LinkEventUser> getAllEventUserLink() {
-        List eventUserList = new ArrayList();
+    public ResponseEntity checkEventUserLink(long eventId, long userId) {
+        try {
+            LinkEventUser link = linkEventUserDao.getByEventUser(eventId, userId);
+        } catch (EmptyResultDataAccessException erdae) {
+            erdae.printStackTrace();
+            return new ResponseEntity<>("False", HttpStatus.OK);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return new ResponseEntity<>("True", HttpStatus.OK);
+    }
+
+    /**
+     * Get all existing event-user links
+     */
+    @RequestMapping(value = "/eulink/get-all")
+    @ResponseBody
+    public ResponseEntity getAllEventUserLink() {
+        List<LinkEventUser> eventUserList;
         try {
             eventUserList = linkEventUserDao.getAll();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception ex) {
-            return null;
-        }
-        return eventUserList;
+        return new ResponseEntity<>(eventUserList, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/get-user-list-by-event")
+    /**
+     * Get the list of users by the passed event ID
+     */
+    @RequestMapping(value = "/eulink/get-user-list-by-event")
     @ResponseBody
-    public List<LinkEventUser> getUserListByEvent(long eventId) {
-        List eventUserList = new ArrayList();
+    public ResponseEntity getUserListByEvent(long eventId) {
+        List<LinkEventUser> eventUserList;
         try {
             eventUserList = linkEventUserDao.getListByEventId(eventId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception ex) {
-            return null;
-        }
-        return eventUserList;
+        return new ResponseEntity<>(eventUserList, HttpStatus.OK);
     }
 
-    @RequestMapping(value="/get-event-list-by-user")
+    /**
+     * Get the list of events by the passed user ID
+     */
+    @RequestMapping(value = "/eulink/get-event-list-by-user")
     @ResponseBody
-    public List<LinkEventUser> getEventListByUser(long userId) {
-        List eventUserList = new ArrayList();
+    public ResponseEntity getEventListByUser(long userId) {
+        List<LinkEventUser> eventUserList;
         try {
             eventUserList = linkEventUserDao.getListByUserId(userId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        catch (Exception ex) {
-            return null;
-        }
-        return eventUserList;
+        return new ResponseEntity<>(eventUserList, HttpStatus.OK);
     }
 
     // Private fields

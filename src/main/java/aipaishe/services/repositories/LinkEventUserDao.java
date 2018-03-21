@@ -57,7 +57,7 @@ public class LinkEventUserDao {
     public List<LinkEventUser> getListByEventId(long eventId) {
         return (List<LinkEventUser>) entityManager.createQuery(
                 "from LinkEventUser where eventId = :eventId")
-                .setParameter("email", eventId)
+                .setParameter("eventId", eventId)
                 .getResultList();
     }
 
@@ -66,7 +66,7 @@ public class LinkEventUserDao {
      */
     public List<LinkEventUser> getListByUserId(long userId) {
         return (List<LinkEventUser>) entityManager.createQuery(
-                "from LinkEventUser where userId = :userId")
+                "FROM LinkEventUser where userId = :userId")
                 .setParameter("userId", userId)
                 .getResultList();
     }
