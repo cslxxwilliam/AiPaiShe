@@ -57,12 +57,12 @@ public class LinkEventUserController {
             LinkEventUser link = linkEventUserDao.getByEventUser(eventId, userId);
         } catch (EmptyResultDataAccessException erdae) {
             erdae.printStackTrace();
-            return new ResponseEntity<>("False", HttpStatus.OK);
+            return new ResponseEntity<>(false, HttpStatus.OK);
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("True", HttpStatus.OK);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
     /**
