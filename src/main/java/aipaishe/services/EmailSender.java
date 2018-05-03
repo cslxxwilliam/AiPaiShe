@@ -15,7 +15,7 @@ import java.util.Properties;
  */
 @Component
 public class EmailSender {
-    public static void sendEmail (String toEmailAddress, long userId, String confirmationUrl) throws IOException {
+    public static void sendEmail(String toEmailAddress, String firstName, long userId, String confirmationUrl) throws IOException {
 
     final String toEmail = toEmailAddress; // can be any email id
 
@@ -24,8 +24,9 @@ public class EmailSender {
         Email from = new Email("registration@aipaishe.com");
         String subject = "AiPaiShe User Registration";
         Email to = new Email(toEmail);
-        Content content = new Content("text/plain", "Congratulations! You have successfully registered in AiPaiShe with member ID "+userId +
-                ".\n Please click the link below to active your account: "+confirmationUrl);
+        String emailBody = String.format("Hi %s,\nCongratulations! You have successfully registered in AiPaiShe. Please click the link below to active your account:\n%s\n\nThanks,\nAiPaiShe team", firstName, confirmationUrl);
+
+        Content content = new Content("text/plain", emailBody);
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));

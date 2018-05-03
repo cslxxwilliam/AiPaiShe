@@ -101,22 +101,10 @@ public class UserRegistrationController {
     public ResponseEntity confirmRegistration
             (WebRequest request, @RequestParam("token") String token) {
 
-//        Locale locale = request.getLocale();
-
         VerificationToken verificationToken = service.getVerificationToken(token);
-//        if (verificationToken == null) {
-//            String message = messages.getMessage("auth.message.invalidToken", null, locale);
-//            model.addAttribute("message", message);
-//            return "redirect:/badUser.html?lang=" + locale.getLanguage();
-//        }
 
         User user = verificationToken.getUser();
         Calendar cal = Calendar.getInstance();
-//        if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-//            String messageValue = messages.getMessage("auth.message.expired", null, locale)
-//            model.addAttribute("message", messageValue);
-//            return "redirect:/badUser.html?lang=" + locale.getLanguage();
-//        }
 
         user.setActivated(true);
         service.saveRegisteredUser(user);

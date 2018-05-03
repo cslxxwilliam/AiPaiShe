@@ -51,6 +51,14 @@ public class User {
         this.activated = false;
     }
 
+    public User(String firstName, String lastName, String email, String password, boolean activated) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.activated = activated;
+    }
+
     public long getId() {
         return id;
     }

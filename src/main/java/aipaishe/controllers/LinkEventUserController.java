@@ -1,7 +1,9 @@
 package aipaishe.controllers;
 
 import aipaishe.models.LinkEventUser;
+import aipaishe.models.User;
 import aipaishe.services.repositories.LinkEventUserDao;
+import aipaishe.services.repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,26 @@ public class LinkEventUserController {
     @RequestMapping(value = "/eulink/create")
     @ResponseBody
     public ResponseEntity createEventUserLink(long eventId, long userId) {
+        LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
+        linkEventUserDao.create(linkEventUser);
+        return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
+    }
+
+    /**
+     * Create a new link for adhoc participant, user will be created if not exists
+     */
+    @RequestMapping(value = "/eulink/createAdhoc")
+    @ResponseBody
+    public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email) {
+        long userId;
+        User existingUser = userDao.getByEmail(email);
+        if(existingUser!=null){
+            userId=existingUser.getId();
+        }else{
+            userDao.create(new User(firstName, lastName, email, email, true));
+            User createdUser = userDao.getByEmail(email);
+            userId=createdUser.getId();
+        }
         LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
         linkEventUserDao.create(linkEventUser);
         return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
@@ -118,4 +140,7 @@ public class LinkEventUserController {
     // Wire the UserDao used inside this controller.
     @Autowired
     private LinkEventUserDao linkEventUserDao;
+
+    @Autowired
+    private UserDao userDao;
 }
