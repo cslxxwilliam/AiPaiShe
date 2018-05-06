@@ -49,6 +49,11 @@ public class LinkEventUserController {
             User createdUser = userDao.getByEmail(email);
             userId=createdUser.getId();
         }
+
+        LinkEventUser foundLinkEvent = linkEventUserDao.getByEventUser(eventId, userId);
+        if(foundLinkEvent!=null){
+            return new ResponseEntity<>(foundLinkEvent, HttpStatus.OK);
+        }
         LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
         linkEventUserDao.create(linkEventUser);
         return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
