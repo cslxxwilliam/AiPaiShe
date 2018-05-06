@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+
+import static java.util.Collections.EMPTY_MAP;
 
 /**
  * Created by hillmon on 14/7/2017.
@@ -42,21 +45,24 @@ public class LinkEventUserController {
     public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email) {
         long userId;
         User existingUser = userDao.getByEmail(email);
-        if(existingUser!=null){
-            userId=existingUser.getId();
-        }else{
+        if (existingUser != null) {
+            userId = existingUser.getId();
+        } else {
             userDao.create(new User(firstName, lastName, email, email, true));
             User createdUser = userDao.getByEmail(email);
-            userId=createdUser.getId();
+            userId = createdUser.getId();
         }
 
-        LinkEventUser foundLinkEvent = linkEventUserDao.getByEventUser(eventId, userId);
-        if(foundLinkEvent!=null){
-            return new ResponseEntity<>(foundLinkEvent, HttpStatus.OK);
+        try {
+            linkEventUserDao.getByEventUser(eventId, userId);
+        } catch (EmptyResultDataAccessException e) {
+            LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
+            linkEventUserDao.create(linkEventUser);
+            return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
         }
-        LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
-        linkEventUserDao.create(linkEventUser);
-        return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
+
+        return new ResponseEntity<>(EMPTY_MAP, HttpStatus.OK);
+
     }
 
     /**
