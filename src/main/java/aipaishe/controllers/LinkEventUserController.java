@@ -1,7 +1,10 @@
 package aipaishe.controllers;
 
+import aipaishe.models.Event;
 import aipaishe.models.LinkEventUser;
+import aipaishe.models.Participant;
 import aipaishe.models.User;
+import aipaishe.services.repositories.EventDao;
 import aipaishe.services.repositories.LinkEventUserDao;
 import aipaishe.services.repositories.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static java.util.Collections.EMPTY_MAP;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by hillmon on 14/7/2017.
@@ -99,6 +101,29 @@ public class LinkEventUserController {
     }
 
     /**
+     * Get participantList if requester is organizer
+     */
+    @RequestMapping(value = "/eulink/participantList")
+    @ResponseBody
+    public ResponseEntity getParticipantList(long eventId, long userId) {
+        try {
+            Event foundEvent = eventDao.getById(eventId);
+
+            if(foundEvent.getOwnerId()==userId){
+                List<LinkEventUser> linkEventUserList = linkEventUserDao.getListByEventId(eventId);
+                List<Participant> participantList = linkEventUserList.stream().map(p -> new Participant(userDao.getById(p.getUserId()))).collect(toList());
+                return new ResponseEntity<>(participantList, HttpStatus.OK);
+            }
+        } catch (EmptyResultDataAccessException erdae) {
+            return new ResponseEntity<>(Collections.EMPTY_MAP, HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return new ResponseEntity<>(Collections.EMPTY_MAP, HttpStatus.OK);
+    }
+
+    /**
      * Get all existing event-user links
      */
     @RequestMapping(value = "/eulink/get-all")
@@ -151,6 +176,9 @@ public class LinkEventUserController {
     // Wire the UserDao used inside this controller.
     @Autowired
     private LinkEventUserDao linkEventUserDao;
+
+    @Autowired
+    private EventDao eventDao;
 
     @Autowired
     private UserDao userDao;
