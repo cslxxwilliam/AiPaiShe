@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Updated by hillmon on 4/3/2018.
@@ -28,7 +29,11 @@ public class EventController {
                              @RequestParam(value = "venue") String eventVenue,
                              @RequestParam(value = "type") String eventType,
                              @RequestParam(value = "quota") int eventQuota) throws ParseException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm Z");
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        //TODO hard-coded timezone as Hong Kong
+        TimeZone timeZone = TimeZone.getTimeZone("Hongkong");
+        formatter.setTimeZone(timeZone);
         Date eventDate = formatter.parse(dateStr);
         Event event = new Event(ownerId, eventDate, eventName, eventVenue, eventType, eventQuota);
         eventDao.create(event);

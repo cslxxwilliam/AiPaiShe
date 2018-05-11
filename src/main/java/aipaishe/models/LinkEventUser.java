@@ -21,21 +21,32 @@ public class LinkEventUser {
     @NotNull
     private long userId;
 
+    private String Remarks;
+
     @NotNull
     private Date updAt;
 
     public LinkEventUser() {
     }
 
-    public LinkEventUser(long eventId, long userId) {
+    public LinkEventUser(long eventId, long userId, String remarks, Date updAt) {
         this.eventId = eventId;
         this.userId = userId;
+        Remarks = remarks;
+        this.updAt = updAt;
     }
 
     public LinkEventUser(long eventId, long userId, Date updAt) {
         this.eventId = eventId;
         this.userId = userId;
         this.updAt = updAt;
+    }
+
+    public LinkEventUser(long eventId, long userId) {
+        this.eventId = eventId;
+        this.userId = userId;
+        this.Remarks = "";
+        this.updAt = new Date();
     }
 
     public long getId() {

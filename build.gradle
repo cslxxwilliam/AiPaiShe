@@ -1,12 +1,20 @@
-// Spring Boot 1.5.4
-plugins {
-    id 'org.springframework.boot' version '1.5.4.RELEASE'
-    id 'java'
-    id 'eclipse'
-    id 'idea'
+// Spring Boot 2.0.2
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.2.RELEASE")
+    }
 }
 
-jar {
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
     baseName = 'aipaishe'
     version =  '0.0.1'
 }
@@ -38,12 +46,4 @@ dependencies {
     compile 'com.sendgrid:sendgrid-java:4.1.0'
 
     compile 'com.google.cloud:google-cloud-storage:1.14.0'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.4'
-}
-
-springBoot {
-    executable = true
 }

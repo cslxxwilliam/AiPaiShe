@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 import static java.util.Collections.EMPTY_MAP;
 import static java.util.stream.Collectors.toList;
@@ -44,13 +46,14 @@ public class LinkEventUserController {
      */
     @RequestMapping(value = "/eulink/createAdhoc")
     @ResponseBody
-    public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email) {
+    public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email, String phoneNo) {
         long userId;
         User existingUser = userDao.getByEmail(email);
         if (existingUser != null) {
             userId = existingUser.getId();
         } else {
-            userDao.create(new User(firstName, lastName, email, email, true));
+            // TODO dummy password is set to be the same as email address
+            userDao.create(new User(email, phoneNo, firstName, lastName, email, true));
             User createdUser = userDao.getByEmail(email);
             userId = createdUser.getId();
         }
