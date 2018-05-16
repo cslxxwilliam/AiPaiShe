@@ -54,17 +54,18 @@ public class Event {
         this.eventId = eventId;
     }
 
-    public Event(long owner, Date date, String name, String venue, String type, int quota) {
-        this.ownerId = owner;
+    public Event(long ownerId, Date date, String name, String venue, String type, double fee, int quota) {
+        this.ownerId = ownerId;
         this.eventDate = date;
         this.eventName = name;
         this.eventVenue = venue;
         this.eventType = type;
         this.eventQuota = quota;
-        // TODO: replace this dummy setting when paid events can be supported
-        this.isPaidEvent = false;
+        this.eventFeeAmt = fee;
+        this.isPaidEvent = fee > 0;
     }
 
+    /*
     public Event(long ownerId, String eventName, Date eventDate, String eventVenue, String eventDesc) {
         this.ownerId = ownerId;
         this.eventName = eventName;
@@ -72,6 +73,7 @@ public class Event {
         this.eventVenue = eventVenue;
         this.eventDesc = eventDesc;
     }
+    */
 
     // Getter and Setter
 

@@ -28,6 +28,7 @@ public class EventController {
                              @RequestParam(value = "name") String eventName,
                              @RequestParam(value = "venue") String eventVenue,
                              @RequestParam(value = "type") String eventType,
+                             @RequestParam(value = "fee") double fee,
                              @RequestParam(value = "quota") int eventQuota) throws ParseException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -35,7 +36,7 @@ public class EventController {
         TimeZone timeZone = TimeZone.getTimeZone("Hongkong");
         formatter.setTimeZone(timeZone);
         Date eventDate = formatter.parse(dateStr);
-        Event event = new Event(ownerId, eventDate, eventName, eventVenue, eventType, eventQuota);
+        Event event = new Event(ownerId, eventDate, eventName, eventVenue, eventType, fee, eventQuota);
         eventDao.create(event);
         return event;
     }
