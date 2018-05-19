@@ -21,7 +21,7 @@ public class LinkEventUser {
     @NotNull
     private long userId;
 
-    private String Remarks;
+    private String remarks;
 
     @NotNull
     private Date updAt;
@@ -32,7 +32,7 @@ public class LinkEventUser {
     public LinkEventUser(long eventId, long userId, String remarks, Date updAt) {
         this.eventId = eventId;
         this.userId = userId;
-        Remarks = remarks;
+        this.remarks = remarks;
         this.updAt = updAt;
     }
 
@@ -45,7 +45,7 @@ public class LinkEventUser {
     public LinkEventUser(long eventId, long userId) {
         this.eventId = eventId;
         this.userId = userId;
-        this.Remarks = "";
+        this.remarks = "";
         this.updAt = new Date();
     }
 
@@ -79,5 +79,13 @@ public class LinkEventUser {
 
     public void setUpdAt(Date updAt) {
         this.updAt = updAt;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

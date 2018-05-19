@@ -35,8 +35,8 @@ public class LinkEventUserController {
      */
     @RequestMapping(value = "/eulink/create")
     @ResponseBody
-    public ResponseEntity createEventUserLink(long eventId, long userId) {
-        LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
+    public ResponseEntity createEventUserLink(long eventId, long userId, String remarks) {
+        LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, remarks, new Date());
         linkEventUserDao.create(linkEventUser);
         return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
     }
@@ -46,7 +46,7 @@ public class LinkEventUserController {
      */
     @RequestMapping(value = "/eulink/createAdhoc")
     @ResponseBody
-    public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email, String phoneNo) {
+    public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email, String phoneNo, String remarks) {
         long userId;
         User existingUser = userDao.getByEmail(email);
         if (existingUser != null) {
@@ -61,7 +61,7 @@ public class LinkEventUserController {
         try {
             linkEventUserDao.getByEventUser(eventId, userId);
         } catch (EmptyResultDataAccessException e) {
-            LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, new Date());
+            LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, remarks, new Date());
             linkEventUserDao.create(linkEventUser);
             return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
         }
@@ -114,7 +114,7 @@ public class LinkEventUserController {
 
             if(foundEvent.getOwnerId()==userId){
                 List<LinkEventUser> linkEventUserList = linkEventUserDao.getListByEventId(eventId);
-                List<Participant> participantList = linkEventUserList.stream().map(p -> new Participant(userDao.getById(p.getUserId()))).collect(toList());
+                List<Participant> participantList = linkEventUserList.stream().map(p -> new Participant(userDao.getById(p.getUserId()), p.getRemarks())).collect(toList());
                 return new ResponseEntity<>(participantList, HttpStatus.OK);
             }
         } catch (EmptyResultDataAccessException erdae) {

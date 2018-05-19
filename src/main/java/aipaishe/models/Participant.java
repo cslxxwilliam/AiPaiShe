@@ -11,12 +11,14 @@ public class Participant {
     private final String lastName;
     private final String email;
     private final String phoneNo;
+    private final String remarks;
 
-    public Participant(User user) {
+    public Participant(User user, String remarks) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
         this.phoneNo = user.getPhoneNo();
+        this.remarks = remarks;
     }
 
 
@@ -34,5 +36,9 @@ public class Participant {
 
     public String getPhoneNo() {
         return phoneNo;
+    }
+
+    public String getRemarks() {
+        return remarks;
     }
 }
