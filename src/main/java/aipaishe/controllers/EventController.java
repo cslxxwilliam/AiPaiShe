@@ -69,19 +69,16 @@ public class EventController {
         return eventList;
     }
 
-    /*
-    @RequestMapping(value = "/get-event-by-name-json")
+    //testing for Teamcity agent with Git
+    @RequestMapping(value = "/event/get/remaining")
     @ResponseBody
-    public Event getByNameJson(String name) {
-        Event event;
+    public Integer getRemainingPlace(long id) {
         try {
-            event = eventDao.getByName(name);
+            return eventDao.getRemainingPlace(id);
         } catch (Exception ex) {
-            return null;
+            return 0;
         }
-        return event;
     }
-    */
 
     /**
      * Update the event identified by the passed id.

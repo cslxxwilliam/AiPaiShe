@@ -1,6 +1,7 @@
 package aipaishe.services.repositories;
 
 import aipaishe.models.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -54,6 +55,22 @@ public class EventDao {
     }
 
     /**
+     * Return the event having the passed id.
+     */
+    public Integer getRemainingPlace(long id) {
+
+        Integer remainingPlace = 0;
+
+        Event event = this.getById(id);
+
+        List participantList = linkEventUserDao.getListByEventId(id);
+
+        remainingPlace = event.getEventQuota() - participantList.size() > 0 ? event.getEventQuota() - participantList.size() : 0;
+
+        return remainingPlace;
+    }
+
+    /**
      * Return the event having the passed event name.
      */
     public Event getByName (String name) {
@@ -76,4 +93,7 @@ public class EventDao {
     // setup on DatabaseConfig class.
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Autowired
+    private LinkEventUserDao linkEventUserDao;
 }
