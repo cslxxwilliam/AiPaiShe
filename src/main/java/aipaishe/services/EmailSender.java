@@ -2,16 +2,12 @@ package aipaishe.services;
 
 import aipaishe.models.Event;
 import aipaishe.models.User;
-import aipaishe.utils.EmailUtil;
 import com.sendgrid.*;
 import org.springframework.stereotype.Component;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Properties;
+import java.util.TimeZone;
 
 /**
  * Created by williamxuxianglin on 23/6/17.
@@ -70,10 +66,15 @@ public class EmailSender {
             return;
         }
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        //TODO hard-coded timezone as Hong Kong
+        TimeZone timeZone = TimeZone.getTimeZone("Hongkong");
+        formatter.setTimeZone(timeZone);
+
         Email from = new Email("admin@eventgou.com");
-        String subject = user.getFirstName() + ", you have joined an EventGou event!";
+        String subject = user.getFirstName() + ", you have joined an event in EventGou!";
         Email to = new Email(user.getEmail());
-        String emailBody = String.format("Hi %s,\n Congratulations! You have successfully joined the following event in EventGou. \n Event Name: %s\n Event Venue: %s\n Event Time: %s\n \n Thanks,\n EventGou Team", user.getFirstName(), event.getEventName(), event.getEventVenue(), new SimpleDateFormat("dd/MM/yyyy HH:mm").format(event.getEventDate()));
+        String emailBody = String.format("Hi %s,\n Congratulations! You have successfully joined the following event in EventGou. \n Event Name: %s\n Event Venue: %s\n Event Time: %s\n \n Thanks,\n EventGou Team", user.getFirstName(), event.getEventName(), event.getEventVenue(), formatter.format(event.getEventDate()));
 
         Content content = new Content("text/plain", emailBody);
         Mail mail = new Mail(from, subject, to, content);
@@ -93,10 +94,10 @@ public class EmailSender {
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
             Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-            System.out.println("Join event confirmation email has been sent successfully!");
+            // System.out.println(response.getStatusCode());
+            // System.out.println(response.getBody());
+            // System.out.println(response.getHeaders());
+            System.out.println("[Debug] Join event confirmation email has been sent to participant!");
         } catch (IOException ex) {
             throw ex;
         }
@@ -111,10 +112,15 @@ public class EmailSender {
             return;
         }
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        //TODO hard-coded timezone as Hong Kong
+        TimeZone timeZone = TimeZone.getTimeZone("Hongkong");
+        formatter.setTimeZone(timeZone);
+
         Email from = new Email("admin@eventgou.com");
-        String subject = owner.getFirstName() + ", someone has joined your EventGou event!";
+        String subject = owner.getFirstName() + ", someone has joined your event in EventGou!";
         Email to = new Email(owner.getEmail());
-        String emailBody = String.format("Hi %s,\n Congratulations! A new participant has successfully joined the following event in EventGou. \n Event Name: %s\n Event Venue: %s\n Event Time: %s\n Participant Name: %s\n Participant Email: %s\n Participant Phone No.: %s\n \n Thanks,\n EventGou Team", owner.getFirstName(), event.getEventName(), event.getEventVenue(), new SimpleDateFormat("dd/MM/yyyy HH:mm").format(event.getEventDate()), participant.getLastName() + " " + participant.getFirstName(), participant.getEmail(), participant.getPhoneNo());
+        String emailBody = String.format("Hi %s,\n Congratulations! A new participant has successfully joined the following event in EventGou. \n Event Name: %s\n Event Venue: %s\n Event Time: %s\n Participant Name: %s\n Participant Email: %s\n Participant Phone No.: %s\n \n Thanks,\n EventGou Team", owner.getFirstName(), event.getEventName(), event.getEventVenue(), formatter.format(event.getEventDate()), participant.getLastName() + " " + participant.getFirstName(), participant.getEmail(), participant.getPhoneNo());
 
         Content content = new Content("text/plain", emailBody);
         Mail mail = new Mail(from, subject, to, content);
@@ -136,10 +142,10 @@ public class EmailSender {
             request.setEndpoint("mail/send");
             request.setBody(mail.build());
             Response response = sg.api(request);
-            System.out.println(response.getStatusCode());
-            System.out.println(response.getBody());
-            System.out.println(response.getHeaders());
-            System.out.println("Join event confirmation email has been sent successfully!");
+            // System.out.println(response.getStatusCode());
+            // System.out.println(response.getBody());
+            // System.out.println(response.getHeaders());
+            System.out.println("[Debug] Join event confirmation email has been sent to event owner!");
         } catch (IOException ex) {
             throw ex;
         }
