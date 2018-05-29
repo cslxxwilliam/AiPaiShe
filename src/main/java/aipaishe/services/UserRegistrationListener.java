@@ -19,8 +19,8 @@ public class UserRegistrationListener implements ApplicationListener<OnRegistrat
         @Autowired
         private IUserService service;
 
-        @Autowired
-        private MessageSource messages;
+    // @Autowired
+    // private MessageSource messages;
 
         @Autowired
         private EmailSender emailSender;
@@ -43,6 +43,6 @@ public class UserRegistrationListener implements ApplicationListener<OnRegistrat
         String confirmationUrl
                 = event.getAppBaseUrl() + "registrationConfirm?token=" + token;
 
-        emailSender.sendEmail(user.getEmail(), user.getFirstName(), user.getId(), confirmationUrl);
+        emailSender.sendRegistrationEmail(user.getEmail(), user.getFirstName(), user.getId(), confirmationUrl);
     }
 }

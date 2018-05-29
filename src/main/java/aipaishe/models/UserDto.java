@@ -1,29 +1,23 @@
 package aipaishe.models;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by williamxuxianglin on 19/6/17.
  */
 public class UserDto {
-        @NotNull
-        @NotEmpty
-        private String firstName;
+    @NotNull
+    private String firstName;
 
-        @NotNull
-        @NotEmpty
-        private String lastName;
+    @NotNull
+    private String lastName;
 
-        @NotNull
-        @NotEmpty
-        private String password;
-        private String matchingPassword;
+    @NotNull
+    private String password;
+    private String matchingPassword;
 
-        @NotNull
-        @NotEmpty
-        private String email;
+    @NotNull
+    private String email;
 
     public String getFirstName() {
         return firstName;

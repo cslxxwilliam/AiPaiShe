@@ -4,6 +4,7 @@ import aipaishe.models.Event;
 import aipaishe.models.LinkEventUser;
 import aipaishe.models.Participant;
 import aipaishe.models.User;
+import aipaishe.services.EmailSender;
 import aipaishe.services.repositories.EventDao;
 import aipaishe.services.repositories.LinkEventUserDao;
 import aipaishe.services.repositories.UserDao;
@@ -48,21 +49,43 @@ public class LinkEventUserController {
     @ResponseBody
     public ResponseEntity createEventUserLinkAdhoc(long eventId, String firstName, String lastName, String email, String phoneNo, String remarks) {
         long userId;
+        Event thisEvent;
+        User eventOwner;
+        User eventParticipant;
+
+        thisEvent = eventDao.getById(eventId);
+        eventOwner = userDao.getById(thisEvent.getOwnerId());
+
         User existingUser = userDao.getByEmail(email);
         if (existingUser != null) {
             userId = existingUser.getId();
+            eventParticipant = existingUser;
         } else {
             // TODO dummy password is set to be the same as email address
             userDao.create(new User(email, phoneNo, firstName, lastName, email, true));
             User createdUser = userDao.getByEmail(email);
             userId = createdUser.getId();
+            eventParticipant = createdUser;
         }
 
         try {
-            linkEventUserDao.getByEventUser(eventId, userId);
+            linkEventUserDao.getByEventUser(eventId, eventParticipant.getId());
         } catch (EmptyResultDataAccessException e) {
             LinkEventUser linkEventUser = new LinkEventUser(eventId, userId, remarks, new Date());
             linkEventUserDao.create(linkEventUser);
+
+            try {
+
+                // send confirmation email to event owner
+                emailSender.sendConfirmJoinOwnerEmail(eventOwner, thisEvent, eventParticipant);
+
+                // send confirmation email to ad-hoc participant
+                emailSender.sendConfirmJoinParticipantEmail(eventParticipant, thisEvent);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
             return new ResponseEntity<>(linkEventUser, HttpStatus.OK);
         }
 
@@ -185,4 +208,7 @@ public class LinkEventUserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private EmailSender emailSender;
 }
