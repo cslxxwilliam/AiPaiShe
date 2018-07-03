@@ -15,6 +15,7 @@ import java.util.TimeZone;
  */
 @Component
 public class EmailSender {
+
     public static void sendRegistrationEmail(String toEmailAddress, String firstName, long userId, String confirmationUrl) throws IOException {
 
     final String toEmail = toEmailAddress; // can be any email id
@@ -146,6 +147,52 @@ public class EmailSender {
             // System.out.println(response.getBody());
             // System.out.println(response.getHeaders());
             System.out.println("[Debug] Join event confirmation email has been sent to event owner!");
+        } catch (IOException ex) {
+            throw ex;
+        }
+    }
+
+    public static void sendReminderEmail(User participant, Event upcomingEvent) throws Exception {
+
+        // Send email with SendGrid
+
+        if (participant.getEmail().isEmpty()) {
+            System.out.println("Event participant email not found, sending task has been cancelled.");
+            return;
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        //TODO hard-coded timezone as Hong Kong
+        TimeZone timeZone = TimeZone.getTimeZone("Hongkong");
+        formatter.setTimeZone(timeZone);
+
+        Email from = new Email("admin@eventgou.com");
+        String subject = "Don't forget your upcoming EventGou event!";
+        Email to = new Email(participant.getEmail());
+        String emailBody = String.format("Hi %s,\n You have an event held today. Remember to attend it! \n Event Name: %s\n Event Venue: %s\n Event Time: %s\n \n Thanks,\n EventGou Team", participant.getFirstName(), upcomingEvent.getEventName(), upcomingEvent.getEventVenue(), formatter.format(upcomingEvent.getEventDate()));
+
+        Content content = new Content("text/plain", emailBody);
+        Mail mail = new Mail(from, subject, to, content);
+
+        if (System.getenv("SENDGRID_API_KEY") != null) {
+            System.out.println("[Debug] SendGrid API Key found: " + System.getenv("SENDGRID_API_KEY"));
+        } else {
+            System.out.println("[Debug] SendGrid API Key not found!");
+            return;
+        }
+
+        SendGrid sg = new SendGrid(System.getenv("SENDGRID_API_KEY"));
+
+        Request request = new Request();
+        try {
+            request.setMethod(Method.POST);
+            request.setEndpoint("mail/send");
+            request.setBody(mail.build());
+            Response response = sg.api(request);
+            // System.out.println(response.getStatusCode());
+            // System.out.println(response.getBody());
+            // System.out.println(response.getHeaders());
+            System.out.println("[Debug] Event reminder email has been sent to event owner!");
         } catch (IOException ex) {
             throw ex;
         }

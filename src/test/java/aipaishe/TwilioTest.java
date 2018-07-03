@@ -2,11 +2,15 @@ package aipaishe;
 
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TwilioTest {
+    private static final Logger log = LoggerFactory.getLogger(TwilioTest.class);
+
     // Find your Account Sid and Token at twilio.com/user/account
-    public static final String ACCOUNT_SID = "AC810dc21c4633b46bcc2601e4af974b1c";
-    public static final String AUTH_TOKEN = "2be02c97d10e78672e603367fdbd4e60";
+    public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
+    public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
 
     public static void main(String[] args) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
@@ -17,6 +21,6 @@ public class TwilioTest {
                 "All in the game, yo")
                 .create();
 
-        System.out.println(message.getSid());
+        log.info("Twilio SID = " + message.getSid());
     }
 }

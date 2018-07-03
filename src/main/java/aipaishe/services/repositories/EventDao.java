@@ -6,7 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,7 +46,7 @@ public class EventDao {
     }
 
     public List getAll() {
-        return entityManager.createQuery("from Event").getResultList();
+        return entityManager.createQuery("SELECT e from Event e").getResultList();
     }
 
     /**
@@ -75,7 +77,7 @@ public class EventDao {
      */
     public Event getByName (String name) {
         return (Event) entityManager.createQuery(
-                "from Event where eventName = :name")
+                "SELECT e from Event e where e.eventName = :name")
                 .setParameter("name", name)
                 .getSingleResult();
     }
@@ -85,6 +87,13 @@ public class EventDao {
      */
     public void update(Event event) {
         entityManager.merge(event);
+    }
+
+
+    public List<Event> getEventListByDate(Date refDate) {
+        TypedQuery<Event> query = entityManager.createQuery(
+                "SELECT e FROM Event e WHERE substring(e.eventDate,1,10) = substring(:date,1,10)", Event.class);
+        return query.setParameter("date", refDate).getResultList();
     }
 
     // Private fields

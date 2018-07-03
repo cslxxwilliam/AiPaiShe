@@ -24,6 +24,12 @@ public class LinkEventUser {
     private String remarks;
 
     @NotNull
+    private boolean emailReminderSent;
+
+    @NotNull
+    private boolean smsReminderSent;
+
+    @NotNull
     private Date updAt;
 
     public LinkEventUser() {
@@ -33,12 +39,16 @@ public class LinkEventUser {
         this.eventId = eventId;
         this.userId = userId;
         this.remarks = remarks;
+        this.emailReminderSent = false;
+        this.smsReminderSent = false;
         this.updAt = updAt;
     }
 
     public LinkEventUser(long eventId, long userId, Date updAt) {
         this.eventId = eventId;
         this.userId = userId;
+        this.emailReminderSent = false;
+        this.smsReminderSent = false;
         this.updAt = updAt;
     }
 
@@ -46,6 +56,8 @@ public class LinkEventUser {
         this.eventId = eventId;
         this.userId = userId;
         this.remarks = "";
+        this.emailReminderSent = false;
+        this.smsReminderSent = false;
         this.updAt = new Date();
     }
 
@@ -73,19 +85,35 @@ public class LinkEventUser {
         this.userId = userId;
     }
 
-    public Date getUpdAt() {
-        return updAt;
-    }
-
-    public void setUpdAt(Date updAt) {
-        this.updAt = updAt;
-    }
-
     public String getRemarks() {
         return remarks;
     }
 
     public void setRemarks(String remarks) {
         this.remarks = remarks;
+    }
+
+    public boolean isEmailReminderSent() {
+        return emailReminderSent;
+    }
+
+    public void setEmailReminderSent(boolean emailReminderSent) {
+        this.emailReminderSent = emailReminderSent;
+    }
+
+    public boolean isSmsReminderSent() {
+        return smsReminderSent;
+    }
+
+    public void setSmsReminderSent(boolean smsReminderSent) {
+        this.smsReminderSent = smsReminderSent;
+    }
+
+    public Date getUpdAt() {
+        return updAt;
+    }
+
+    public void setUpdAt(Date updAt) {
+        this.updAt = updAt;
     }
 }
