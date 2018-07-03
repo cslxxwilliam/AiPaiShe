@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0b169e22-08eb-4130-981e-6b16cae9e238" name="Default" comment="AIPAISHE-184 Create a new link for adhoc participant, user will be created if not exists&#10;- update registration email wording&#10;- remove unused comment">
-      <change afterPath="$PROJECT_DIR$/src/main/java/aipaishe/services/SmsSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_validation_validation_api_1_1_0_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/AiPaiShe.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AiPaiShe.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/AiPaiShe_main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AiPaiShe_main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/AiPaiShe_test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/AiPaiShe_test.iml" afterDir="false" />
+    <list id="b89cbc98-d7b7-4855-8f60-7922b8c3b2c9" name="idea" comment="idea" />
+    <list default="true" id="0b169e22-08eb-4130-981e-6b16cae9e238" name="Default" comment="AIPAISHE-213/216 Event reminders with Email/SMS">
+      <change afterPath="$PROJECT_DIR$/src/main/java/aipaishe/scheduling/ScheduledTasks.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aipaishe/AipaisheApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aipaishe/AipaisheApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aipaishe/models/LinkEventUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aipaishe/models/LinkEventUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aipaishe/services/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aipaishe/services/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aipaishe/services/repositories/EventDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aipaishe/services/repositories/EventDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/aipaishe/TwilioTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/aipaishe/TwilioTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasksTest.java" afterDir="false" />
     </list>
     <list id="6f98bf42-c240-445f-88fd-212b9a6b08a2" name="personal ignore" comment="personal ignore" />
-    <list id="b89cbc98-d7b7-4855-8f60-7922b8c3b2c9" name="idea" comment="idea" />
     <ignored path="classes/" />
     <ignored path="build/" />
     <ignored path=".idea/libraries/" />
@@ -90,10 +80,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SmsSender.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SmsSender.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/services/SmsSender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
+            <state relative-caret-position="525">
               <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -120,11 +110,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScheduledTasks.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java">
+      <file leaf-file-name="ScheduledTasksTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasksTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="1230">
               <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScheduledTasks.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/scheduling/ScheduledTasks.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="31" column="67" selection-start-line="31" selection-start-column="67" selection-end-line="31" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -133,7 +132,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/services/repositories/EventDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="152">
-              <caret line="93" column="53" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
+              <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
             </state>
           </provider>
         </entry>
@@ -634,8 +633,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/aipaishe/FileUploadService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/aipaishe/models/FileUploadFileBasedRepository.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/public/js/fileApp.js" />
         <option value="$PROJECT_DIR$/public/aipaishe-home.js" />
@@ -685,6 +682,8 @@
         <option value="$PROJECT_DIR$/src/test/java/aipaishe/TwilioTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java" />
         <option value="$PROJECT_DIR$/src/main/java/aipaishe/services/SmsSender.java" />
+        <option value="$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasksTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/aipaishe/scheduling/ScheduledTasks.java" />
       </list>
     </option>
   </component>
@@ -755,44 +754,7 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="aipaishe" type="462c0819:PsiDirectoryNode" />
-              <item name="configs" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AiPaiShe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AiPaiShe" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="aipaishe" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AiPaiShe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AiPaiShe" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="aipaishe" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AiPaiShe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AiPaiShe" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="aipaishe" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AiPaiShe" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AiPaiShe" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="aipaishe" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="repositories" type="462c0819:PsiDirectoryNode" />
+              <item name="scheduling" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AiPaiShe" type="b2602c69:ProjectViewProjectNode" />
@@ -865,6 +827,7 @@
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="aipaishe.scheduling" />
       <recent name="aipaishe.services" />
       <recent name="aipaishe.services.repositories" />
       <recent name="aipaishe.controllers" />
@@ -1198,14 +1161,7 @@
       <workItem from="1529287776410" duration="1859000" />
       <workItem from="1529336923685" duration="1909000" />
       <workItem from="1529768042620" duration="2370000" />
-      <workItem from="1530633313463" duration="2959000" />
-    </task>
-    <task id="LOCAL-00001" summary="rename file">
-      <created>1479016966859</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1479016966859</updated>
+      <workItem from="1530633313463" duration="3644000" />
     </task>
     <task id="LOCAL-00002" summary="rename file">
       <created>1479020743400</created>
@@ -1543,11 +1499,18 @@
       <option name="project" value="LOCAL" />
       <updated>1529341106908</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="AIPAISHE-213/216 Event reminders with Email/SMS">
+      <created>1530640149387</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1530640149388</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9097000" />
+    <option name="totallyTimeSpent" value="9782000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1579,12 +1542,12 @@
       <window_info id="Image Layers" order="5" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
       <window_info anchor="right" id="Capture Analysis" order="9" />
-      <window_info active="true" anchor="bottom" id="Run Dashboard" order="8" visible="true" weight="0.40275863" />
+      <window_info anchor="bottom" id="Run Dashboard" order="8" visible="true" weight="0.40275863" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.79375" weight="0.37241378" />
       <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.475" weight="0.50680786" />
       <window_info anchor="bottom" id="Spring" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32827586" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28756058" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28756058" />
       <window_info anchor="right" id="Bean Validation" order="5" weight="0.31744748" />
       <window_info id="Web" order="2" side_tool="true" />
       <window_info anchor="right" id="Gradle" order="6" weight="0.3279483" />
@@ -1687,8 +1650,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <MESSAGE value="AIPAISHE-71 check in properties file for file saving path&#10;Will" />
-    <MESSAGE value="AIPAISHE-71 clean up the pages&#10;- update alet to console log&#10;- add icon for image upload&#10;- update wording&#10;Will" />
     <MESSAGE value="AIPAISHE-71 remove top #wedding search bar&#10;Will" />
     <MESSAGE value="AIPAISHE-71 increase margin for the first md-input-container in event viwe page&#10;Will" />
     <MESSAGE value="AIPAISHE-80 first push for the user signup&#10;- create sign up page&#10;- basic skeleton of backend models and service&#10;Will" />
@@ -1712,7 +1673,9 @@
     <MESSAGE value="AIPAISHE-154 remove the duplicated response body for both login" />
     <MESSAGE value="Add testing code for Spring scheduling and Twilio API" />
     <MESSAGE value="Added Twilio SDK in Gradle build file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Twilio SDK in Gradle build file" />
+    <MESSAGE value="AIPAISHE-184 Create a new link for adhoc participant, user will be created if not exists&#10;- update registration email wording&#10;- remove unused comment" />
+    <MESSAGE value="AIPAISHE-213/216 Event reminders with Email/SMS" />
+    <option name="LAST_COMMIT_MESSAGE" value="AIPAISHE-213/216 Event reminders with Email/SMS" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1738,7 +1701,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/registration/userregistration.html" />
     <entry file="file://$PROJECT_DIR$/public/registration/signup.confirmation.html" />
     <entry file="file://$PROJECT_DIR$/public/js/headerComponents.js" />
     <entry file="file://$PROJECT_DIR$/public/header.html" />
@@ -1985,7 +1947,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/services/repositories/EventDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
-          <caret line="93" column="53" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
+          <caret line="92" column="52" selection-start-line="92" selection-start-column="52" selection-end-line="92" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -2010,13 +1972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasks.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/controllers/LinkEventUserController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
@@ -2033,11 +1988,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/services/SmsSender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
+        <state relative-caret-position="525">
           <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/aipaishe/ScheduledTasksTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/aipaishe/scheduling/ScheduledTasks.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="31" column="67" selection-start-line="31" selection-start-column="67" selection-end-line="31" selection-end-column="67" />
         </state>
       </provider>
     </entry>

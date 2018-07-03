@@ -21,9 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 @Component
-public class ScheduledTasks {
+public class ScheduledTasksTest {
 
-    private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger log = LoggerFactory.getLogger(ScheduledTasksTest.class);
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
